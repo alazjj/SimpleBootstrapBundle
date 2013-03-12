@@ -21,29 +21,13 @@
         }
     ],
 
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "alazjj/jquery",
-                "version": "1.9.1",
-                "dist": {
-                    "url": "http://code.jquery.com/jquery-1.9.1.min.js",
-                    "type": "file"
-                }
-            }
-        }
-    ],
-
     "minimum-stability": "dev",
 
     "target-dir": "Alazjj/SimpleBootstrapBundle",
 
     "require": {
         "php": ">=5.3.3",
-        "symfony/framework-bundle": "~2.2",
-        "twig/twig": "~1.11",
-        "alazjj/jquery": "1.9.1"
+        "symfony/framework-bundle": "~2.2"
     },
 
     "autoload": {

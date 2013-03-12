@@ -1,0 +1,13 @@
+assetic:
+    assets:
+        bootstrap_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/alazjj/bootstrap/twitter/js/bootstrap.min.js
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/alazjj/bootstrap/twitter/css/bootstrap.min.css
+            filters:
+                - cssrewrite
+        bootstrap_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/alazjj/jquery/jquery-1.9.1.min.js

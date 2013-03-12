@@ -25,9 +25,13 @@ $(function () {
          * Open the modal and put the body var into modal body
          * (element with .modal-body css class)
          */
-        openModalWithBody: function($modal, body) {
-            var $modalContent = $('.modal-body', modal);
-            $modalContent.html(body);
+        function openModalWithBody ($modal, body) {
+            var $modalContent =  $modal.find('div.modal-body');
+            if ($modalContent.lenght == 1) {
+                $modalContent.html(body);
+            } else {
+                $modal.html(body)
+            }
             $modal.modal('show');
         }
 
@@ -35,8 +39,8 @@ $(function () {
          * Open the "error modal". It is the current modal with
          * error retuened (by the server) as body
          */
-        openModalWithError: function ($modal, jqXHR) {
-            if(env == 'prod') {
+        function openModalWithError ($modal, jqXHR) {
+            if(env != 'dev') {
                 openModalWithBody($modal, jqXHR.responseText);
             } else {
                 // TODO : get the content of the symfony response.
@@ -58,70 +62,87 @@ $(function () {
                  alert("Oops! An Error Occurred, the popup container was not found...");
                 return false;
             }
+            $this.on("click", function() {
+                // Get the content of the popup
+                $.get(url, function(response) {
+                    if(response == "" || response == undefined) {
+                        response = "Oops! An Error Occurred, The response from the server is empty...";
+                        openModalWithBody($modal, response);
+                        return false;
+                    } else {
+                        // Display the modal with its content
+                        $modal.html(response);
+                        $modal.modal('show');
 
-            // Get the content of the popup
-            $.get(url, function(response) {
-                if(response == "" || response == undefined) {
-                    response = "Oops! An Error Occurred, The response from the server is empty...";
-                } else {
-                    // Form element in the response
-                    var $form = $('form[data-submit="ajax"]', response);
-                    // Form Input submit
-                    var $submitButton = $('input[type=submit]', response);
+                        // Form element in the response
+                        var $form = $('form[data-submit="ajax"]');
+                        // Form Input submit
+                        var $submitButton = $('input[type=submit]');
 
-                    if ($form.length == 1) {
-                        // Disable the submit button
-                        $submitButton.attr('disabled', false);
+                        if ($form.length == 1) {
+                            $form.on("submit", function(even) {
+                                even.preventDefault();
 
-                        // Ajax Submition
-                        $form.ajaxSubmit({
-                            statusCode: {
-                                // The request is successful, the page have be "reloader"
-                                301: function (responseText) {
-                                    $modal.('hide');
-                                    $('body').html(responseText);
-                                }
-                            },
-                            // The request is successful but the form was not valid,
-                            // we have to print again the form.
-                            success: function(responseText) {
-                                $modal.html(responseText);
-                            },
-                            // The request failed
-                            error: function(jqXHR) {
-                                openModalWithError ($modal, jqXHR);
-                            }
-                        });
+                                // Disable the submit button
+                                $submitButton.attr('disabled', false);
+
+                                // Ajax Submition
+                                $form.ajaxSubmit({
+                                    statusCode: {
+                                        // You have to use 204 (http status code) if you want send
+                                        // a request and close the modal.
+                                        204: function(){
+                                            $modal.modal('hide');
+                                        },
+                                        // If you want to reload the page use 205
+                                        205: function(){
+                                            location.reload();
+                                        }
+                                    },
+                                    // The request is successful (code), you display the modal.
+                                    success: function(responseText, textStatus, jqXHR) {
+                                        if(jqXHR.status == 200) {
+                                            $modal.html(responseText);
+                                        }
+                                    },
+                                    // The request failed
+                                    error: function(jqXHR) {
+                                        openModalWithError ($modal, jqXHR);
+                                    }
+                                });
+                            });
+                        }
                     }
-                }
-            }).fail(function(jqXHR) {
-                openModalWithError ($modal, jqXHR);
+                }).fail(function(jqXHR) {
+                    openModalWithError ($modal, jqXHR);
+                });
             });
+
         });
 
         return $this;
-    });
+    };
 
-    $.fn.confirmModal = function() {
-        this.each(function () {
-            var $this = $(this);
-            // Confirm popup content
-            var body = $(this).data('body');
-
-
-            // Get the popup container
-            if ($this.is('a')) {
-                $modal = $($this.attr('href'));
-            } else {
-                $modal = $($(this).data('target'));
-            }
-
-            if ($modal.length == 0) {
-                 alert("Oops! An Error Occurred, the popup container was not found...");
-                return false;
-            }
-
-            openModalWithBody($modal, body);
-        }
-    }
+//    $.fn.confirmModal = function() {
+//        this.each(function () {
+//            var $this = $(this);
+//            // Confirm popup content
+//            var body = $(this).data('body');
+//
+//
+//            // Get the popup container
+//            if ($this.is('a')) {
+//                $modal = $($this.attr('href'));
+//            } else {
+//                $modal = $($(this).data('target'));
+//            }
+//
+//            if ($modal.length == 0) {
+//                 alert("Oops! An Error Occurred, the popup container was not found...");
+//                return false;
+//            }
+//
+//            openModalWithBody($modal, body);
+//        }
+//    }
 });

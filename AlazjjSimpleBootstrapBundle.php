@@ -3,7 +3,7 @@ namespace Alazjj\SimpleBootstrapBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SimpleBootstrapBundle extends Bundle
+class AlazjjSimpleBootstrapBundle extends Bundle
 {
 
 }

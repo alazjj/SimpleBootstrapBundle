@@ -1,3 +1,4 @@
+{% import "AlazjjSimpleBootstrapBundle:Modal:default.html.twig" as modal %}
 <!DOCTYPE html>
 
 <html lang="{{ app.request.locale }}">
@@ -24,6 +25,8 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 
-{% block body %}{% endblock %}
+<body data-env="{{ app.environment | default('prod') }}">
+    {% block body %}{% endblock %}
+</body>
 
 </html>

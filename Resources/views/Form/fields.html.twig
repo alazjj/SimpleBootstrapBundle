@@ -1,0 +1,20 @@
+{% use 'form_div_layout.html.twig' %}
+
+{# Form row #}
+{% block form_row %}
+<div class="control-group {% if errors|length %}error{% endif %}">
+    {{ form_label(form) }}
+    <div class="controls">
+        {{ form_widget(form) }}
+        {% if errors|length %}
+            <span class="help-block">{{ form_errors(form) }}</span>
+        {% endif %}
+    </div>
+</div>
+{% endblock form_row %}
+
+{# Form label #}
+{% block form_label %}
+    {% set label_attr = label_attr | merge({'class' : 'control-label'}) %}
+    {{ parent() }}
+{% endblock form_label %}

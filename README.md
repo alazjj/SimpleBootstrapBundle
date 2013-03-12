@@ -33,12 +33,36 @@ Add AlazjjSimpleBootstrapBundle in your composer.json:
                     "type": "zip"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "alazjj/bootstrap/datepicker",
+                "version": "dev-master",
+                "dist": {
+                    "url": "http://www.eyecon.ro/bootstrap-datepicker/datepicker.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "alazjj/bootstrap/colorpicker",
+                "version": "dev-master",
+                "dist": {
+                    "url": "http://www.eyecon.ro/bootstrap-colorpicker/colorpicker.zip",
+                    "type": "zip"
+                }
+            }
         }
     ],
     "require": {
         "alazjj/SimpleBootstrapBundle": "dev-master",
         "alazjj/jquery": "1.9.1",
-        "alazjj/bootstrap/twitter": "2.3.1"
+        "alazjj/bootstrap/twitter": "2.3.1",
+        "alazjj/bootstrap/datepicker": "dev-master",
+        "alazjj/bootstrap/colorpicker": "dev-master"
     }
 }
 ```

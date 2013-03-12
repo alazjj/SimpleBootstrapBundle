@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="{{ app.request.locale }}">
+
+<head>
+    <meta charset="UTF-8"/>
+    {% block css %}
+        {% stylesheets
+            "@bootstrap_css"
+        %}
+            <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen"/>
+        {% endstylesheets %}
+    {% endblock css %}
+    {% block javascript %}
+        {% javascripts
+            "@jquery_js"
+            "@bootstrap_js"
+            "@AlazjjSimpleBootstrapBundle/Resources/public/js/*"
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock javascript %}
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+
+{% block body %}{% endblock %}
+
+</html>

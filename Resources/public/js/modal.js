@@ -12,6 +12,8 @@ $(function () {
      * @return mixed false|modalContainer
      */
     function getModalContainer($element, defaultModal) {
+        var $modal, $defaultModal;
+
         if ($element.is('a')) {
             $modal = $($element.attr('href'));
         } else {

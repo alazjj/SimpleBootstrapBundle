@@ -1,0 +1,12 @@
+services:
+    alazjj_simple_bootstrap.form.type.datepicker:
+        class: Alazjj\SimpleBootstrapBundle\Form\Type\DatepickerType
+        arguments:
+            - "%locale%"
+        tags:
+            - { name: form.type, alias: datepicker }
+
+    alazjj_simple_bootstrap.form.type.colorpicker:
+        class: Alazjj\SimpleBootstrapBundle\Form\Type\ColorpickerType
+        tags:
+            - { name: form.type, alias: colorpicker }

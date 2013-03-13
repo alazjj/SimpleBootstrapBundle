@@ -8,10 +8,10 @@ $(function () {
     /**
      * Get the modal container
      * @param $element
+     * @param defaultModal
      * @return mixed false|modalContainer
      */
-    function getModalContainer($element) {
-        // Get the popup container
+    function getModalContainer($element, defaultModal) {
         if ($element.is('a')) {
             $modal = $($element.attr('href'));
         } else {
@@ -19,8 +19,12 @@ $(function () {
         }
 
         if ($modal.length == 0) {
-             alert("Oops! An Error Occurred, the popup container was not found...");
-            return false;
+            $defaultModal = $(defaultModal);
+            if ($defaultModal.length == 0) {
+                alert("Oops! An Error Occurred, the popup container was not found...");
+                return false;
+            }
+            $modal = $defaultModal;
         }
 
         return $modal;
@@ -56,6 +60,9 @@ $(function () {
      * @return {*|jQuery|HTMLElement}
      */
     $.fn.simpleModal = function(){
+        // Default modal container
+        var defaultContainer = '#basicModalContainer';
+
         /**
          * Open the "error modal". It is the current modal with
          * error retuened (by the server) as body
@@ -77,7 +84,7 @@ $(function () {
             // Url which return content of the popup up
             var url = $this.data('url');
 
-            if (($modal = getModalContainer($this)) == false) {
+            if (($modal = getModalContainer($this, defaultContainer)) == false) {
                 return false;
             }
 
@@ -164,6 +171,9 @@ $(function () {
      * @return {*|jQuery|HTMLElement}
      */
     $.fn.confirmModal = function() {
+        // Default modal container
+        var defaultContainer = '#confirmModalContainer';
+
         this.each(function () {
             // Modal element
             var $modal;
@@ -174,7 +184,7 @@ $(function () {
             // Url used if you confirm the action
             var url = $this.data('url');
 
-            if (($modal = getModalContainer($this)) == false) {
+            if (($modal = getModalContainer($this, defaultContainer)) == false) {
                 return false;
             }
 
@@ -216,6 +226,9 @@ $(function () {
      * @return {*|jQuery|HTMLElement}
      */
     $.fn.alertModal = function() {
+        // Default modal container
+        var defaultContainer = '#alertModalContainer';
+
         this.each(function () {
             // Modal element
             var $modal;
@@ -224,7 +237,7 @@ $(function () {
             // Confirm popup message (question)
             var message = $this.data('message');
 
-            if (($modal = getModalContainer($this)) == false) {
+            if (($modal = getModalContainer($this, defaultContainer)) == false) {
                 return false;
             }
 

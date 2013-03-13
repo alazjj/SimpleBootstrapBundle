@@ -25,8 +25,12 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 
-<body data-env="{{ app.environment | default('prod') }}">
-    {% block body %}{% endblock %}
-</body>
+    <body data-env="{{ app.environment | default('prod') }}">
+        {% block body %}{% endblock %}
 
+        {# Basic modal container #}
+        {{ modal.confirmModal() }}
+        {{ modal.alertModal() }}
+        {{ modal.containerModal() }}
+    </body>
 </html>

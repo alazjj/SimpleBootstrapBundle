@@ -110,13 +110,6 @@ Register the bundle in the kernel :
     }
 ```
 
-Import the services dedicated to the datepicker and colorpicker forms types :
-```yaml
-    # app/config/config.yml
-    imports:
-        - { resource: @AlazjjSimpleBootstrapBundle/Resources/config/services.yml }
-```
-
 Import or copy the assets configuration :
 ```yaml
     # app/config/config.yml

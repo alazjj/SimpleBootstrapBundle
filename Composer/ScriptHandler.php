@@ -13,33 +13,45 @@ class ScriptHandler
     private static $VENDOR_DIR;
     private static $BUNDLE_CSS_DIR;
 
-    public function __construct()
+    public static function getVendorDir()
     {
         if (is_null(self::$VENDOR_DIR))
         {
-            self::$VENDOR_DIR = __DIR__ . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+            self::$VENDOR_DIR = realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
         }
+
+        return self::$VENDOR_DIR;
+    }
+
+    public static function getBundleCssDir()
+    {
         if (is_null(self::$BUNDLE_CSS_DIR))
         {
-            self::$BUNDLE_CSS_DIR = __DIR__ . '..' . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR;
+            self::$BUNDLE_CSS_DIR = realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR);
         }
+
+        return self::$BUNDLE_CSS_DIR;
     }
 
     public static function buildCssSymlink()
     {
         $fs = new Filesystem();
 
+        self::getVendorDir();
+        self::getBundleCssDir();
+
         $finder = new Finder();
         $finder->files()
-            ->in(self::$VENDOR_DIR)->name('/\.css$/')
+            ->in(self::getVendorDir())
+            ->name('/\.css$/')
             ->exclude('SimpleBootstrapBundle');
 
         /** @var $css SplFileInfo */
         foreach ($finder as $css) {
             try {
-                $fs->symlink($css->getPath(), self::$VENDOR_DIR . self::$BUNDLE_CSS_DIR . $css->getBasename());
+                $fs->symlink($css->getPathname(), self::getBundleCssDir() . DIRECTORY_SEPARATOR . $css->getBasename());
             } catch (IOException $e) {
-                echo "An error occurred while symlinking the css {$css->getBasename()}.";
+                echo "An error occurred while symlinking the css {$css->getBasename()}.\n";
             }
         }
     }

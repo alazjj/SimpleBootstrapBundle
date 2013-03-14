@@ -34,5 +34,14 @@
         "psr-0": {
             "Alazjj\\SimpleBootstrapBundle": ""
         }
+    },
+
+    "scripts": {
+        "post-install-cmd": [
+            "Alazjj\\SimpleBootstrapBundle\\Composer\\ScriptHandler::buildCssSymlink"
+        ],
+        "post-update-cmd": [
+            "Alazjj\\SimpleBootstrapBundle\\Composer\\ScriptHandler::buildCssSymlink"
+        ]
     }
 }

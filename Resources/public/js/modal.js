@@ -38,7 +38,7 @@ $(function () {
      * (element with .modal-body css class)
      */
     function openModalWithBody ($modal, body) {
-        var $modalContent =  $modal.find('div.modal-body');
+        var $modalContent =  $modal.find('.modal-body');
         if ($modalContent.length == 1) {
             $modalContent.html(body);
         } else {
@@ -156,7 +156,7 @@ $(function () {
      * if he validates it.
      *
      * Put three others attributes on the clickable element:
-     * - data-url : url where is redirected the user if he validate the modal
+     * - data-url : url where is redirected the user if he validates the modal
      * - href or data-target : modal element id, you must used
      *   it as an anchor or a button (bootstrap mechanism )
      * - data-message (optional) : Displayed message on the modal

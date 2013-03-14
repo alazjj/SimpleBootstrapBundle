@@ -1,0 +1,8 @@
+modal:
+    alert:
+        title: Alert
+        close : Close
+    confirm:
+        title: Confirmation
+        validate: Validate
+        close: Close

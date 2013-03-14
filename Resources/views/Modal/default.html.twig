@@ -12,11 +12,11 @@
     <div class="modal-body"></div>
 
     <div class="modal-footer">
+        <a href="#" data-action="confirm" class="btn btn-primary">
+            {{ 'modal.confirm.validate' | trans  }}
+        </a>
         <a href="#" class="btn" data-dismiss="modal">
             {{ 'modal.confirm.close' | trans  }}
-        </a>
-        <a href="#" data-action="confirm" class="btn btn-primary">
-            {{ 'modal.confirm.title' | trans  }}
         </a>
     </div>
 </div>
@@ -33,7 +33,7 @@
 
     <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal">
-            {{ 'modal.alert.ok' | trans  }}
+            {{ 'modal.alert.close' | trans  }}
         </a>
     </div>
 </div>

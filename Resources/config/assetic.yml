@@ -1,6 +1,6 @@
 assetic:
     use_controller: false
-    bundles: [AlazjjSimpleBootstrapBundle]
+    bundles: []
     filters:
         cssrewrite: ~
     assets:
@@ -12,9 +12,9 @@ assetic:
             filters: [?yui_js]
         bootstrap_css:
             inputs:
-                - %kernel.root_dir%/../vendor/alazjj/bootstrap/twitter/css/bootstrap.min.css
-                - %kernel.root_dir%/../vendor/alazjj/bootstrap/datepicker/css/datepicker.css
-                - %kernel.root_dir%/../vendor/alazjj/bootstrap/colorpicker/css/colorpicker.css
+                - bundles/alazjjsimplebootstrap/css/bootstrap.min.css
+                - bundles/alazjjsimplebootstrap/css/datepicker.css
+                - bundles/alazjjsimplebootstrap/css/colorpicker.css
             filters: [cssrewrite]
         jquery_js:
             inputs:

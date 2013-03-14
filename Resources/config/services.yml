@@ -10,3 +10,8 @@ services:
         class: Alazjj\SimpleBootstrapBundle\Form\Type\ColorpickerType
         tags:
             - { name: form.type, alias: colorpicker }
+
+    alazjj_simple_bootstrap.form.extension:
+        class: Alazjj\SimpleBootstrapBundle\Form\Extension\FormExtension
+        tags:
+            - { name: form.type_extension, alias: form }

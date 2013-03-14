@@ -66,3 +66,36 @@ Add AlazjjSimpleBootstrapBundle in your composer.json:
     }
 }
 ```
+
+
+## Configuration
+
+Register the bundle in the kernel :
+```php
+    <?php
+    // app/AppKernel.php
+
+    public function registerBundles()
+    {
+        $bundles = array(
+            // ...
+            new Alazjj\SimpleBootstrapBundle\AlazjjSimpleBootstrapBundle(),
+        );
+    }
+```
+
+Import the services dedicated to the datepicker and colorpicker forms types :
+```yaml
+    # app/config/config.yml
+    imports:
+        - { resource: @AlazjjSimpleBootstrapBundle/Resources/config/services.yml }
+```
+
+Use AlazjjSimpleBootstrapBundle the template to display forms and fields :
+```yaml
+    # app/config/config.yml
+    twig:
+        form:
+            resources:
+                - 'AlazjjSimpleBootstrapBundle:Form:fields.html.twig'
+```

@@ -1,6 +1,8 @@
 assetic:
     use_controller: false
     bundles: [AlazjjSimpleBootstrapBundle]
+    filters:
+        cssrewrite: ~
     assets:
         bootstrap_js:
             inputs:

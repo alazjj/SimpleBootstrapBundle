@@ -33,7 +33,10 @@ class ScriptHandler
         return self::$BUNDLE_CSS_DIR;
     }
 
-    public static function buildCssSymlink()
+    /**
+     * Creates a symlink for each CSS into the public/css directory of the bundle.
+     */
+    public static function installAssets()
     {
         $fs = new Filesystem();
 

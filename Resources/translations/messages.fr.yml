@@ -3,6 +3,6 @@ modal:
         title: Alerte
         close : Fermer
     confirm:
-        title: Confirmation
+        title: Demande de confirmation
         validate: Valider
         close: Fermer

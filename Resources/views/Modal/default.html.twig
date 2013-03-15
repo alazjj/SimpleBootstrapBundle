@@ -1,21 +1,33 @@
 {% macro containerModal(id) %}
-<div class="modal fade hide" id="{{ id | default('basicModalContainer') }}"></div>
+<div class="modal fade hide"
+     data-modal="simple"
+     id="{{ id | default('basicModalContainer') }}">
+</div>
 {% endmacro %}
 
 {% macro confirmModal(id) %}
-<div class="modal fade hide" id="{{ id | default('confirmModalContainer') }}">
+<div class="modal fade hide"
+     id="{{ id | default('confirmModalContainer') }}">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <button type="button"
+                 class="close"
+                 data-dismiss="modal"
+                 aria-hidden="true">
+            &times;
+        </button>
         <h3>{{ 'modal.confirm.title' | trans  }}</h3>
     </div>
 
     <div class="modal-body"></div>
 
     <div class="modal-footer">
-        <a href="#" data-action="confirm" class="btn btn-primary">
+        <a href="#"
+           class="btn btn-primary">
             {{ 'modal.confirm.validate' | trans  }}
         </a>
-        <a href="#" class="btn" data-dismiss="modal">
+        <a href="#"
+           class="btn"
+           data-dismiss="modal">
             {{ 'modal.confirm.close' | trans  }}
         </a>
     </div>
@@ -23,9 +35,15 @@
 {% endmacro %}
 
 {% macro alertModal(id) %}
-<div class="modal fade hide" id="{{ id | default('alertModalContainer') }}">
+<div class="modal fade hide"
+     id="{{ id | default('alertModalContainer') }}">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <button type="button"
+                 class="close"
+                 data-dismiss="modal"
+                 aria-hidden="true">
+            &times;
+        </button>
         <h3>{{ 'modal.alert.title' | trans  }}</h3>
     </div>
 

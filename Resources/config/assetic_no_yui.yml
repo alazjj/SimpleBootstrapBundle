@@ -1,0 +1,21 @@
+assetic:
+    use_controller: false
+    bundles: []
+    filters:
+        cssrewrite: ~
+    assets:
+        bootstrap_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/alazjj/bootstrap/twitter/js/bootstrap.min.js
+                - %kernel.root_dir%/../vendor/alazjj/bootstrap/datepicker/js/bootstrap-datepicker.js
+                - %kernel.root_dir%/../vendor/alazjj/bootstrap/colorpicker/js/bootstrap-colorpicker.js
+        bootstrap_css:
+            inputs:
+                - bundles/alazjjsimplebootstrap/css/bootstrap.min.css
+                - bundles/alazjjsimplebootstrap/css/datepicker.css
+                - bundles/alazjjsimplebootstrap/css/colorpicker.css
+            filters: [cssrewrite]
+        jquery_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/alazjj/jquery/jquery-1.9.1.min.js
+                - %kernel.root_dir%/../vendor/alazjj/jquery/form/jquery.form.js

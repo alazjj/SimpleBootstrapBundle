@@ -1,6 +1,5 @@
 {% macro containerModal(id) %}
 <div class="modal fade hide"
-     data-modal="simple"
      id="{{ id | default('basicModalContainer') }}">
 </div>
 {% endmacro %}
@@ -27,6 +26,7 @@
             {{ 'modal.confirm.close' | trans  }}
         </a>
         <a href="#"
+           data-action="confirm"
            class="btn btn-primary">
             {{ 'modal.confirm.validate' | trans  }}
         </a>

@@ -1,23 +1,46 @@
 {% use 'form_div_layout.html.twig' %}
 
+
 {# Form row #}
 {% block form_row %}
 <div class="control-group {% if errors|length %}error{% endif %}">
     {{ form_label(form) }}
-    <div class="controls">
-        {{ form_widget(form) }}
-        {% if errors|length %}
-            <span class="help-block">{{ form_errors(form) }}</span>
+    <div class="controls"
+         {% if is_editable %}
+         data-form-input='{{ form_widget(form) }}'
+         data-form="row"
+         {% endif %}>
+
+        {%  if is_active %}
+            {{ form_widget(form) }}
+            {% if errors|length %}
+                <span class="help-block">{{ form_errors(form) }}</span>
+            {% endif %}
+        {%  else %}
+            {% if value is not empty %}
+                <p class="displayValue">
+                    {{ value }}
+                </p>
+            {% endif %}
+
+            {%  if is_editable %}
+                <i class="icon-edit"
+                   data-form-edit="row">
+                    X
+                </i>
+            {% endif %}
         {% endif %}
     </div>
 </div>
 {% endblock form_row %}
+
 
 {# Form label #}
 {% block form_label %}
     {% set label_attr = label_attr | merge({'class' : 'control-label'}) %}
     {{ parent() }}
 {% endblock form_label %}
+
 
 {# Datepicker widget #}
 {% block datepicker_widget %}
@@ -34,6 +57,8 @@
     {% endspaceless %}
 {% endblock %}
 
+
+{# Colorpicker widget #}
 {% block colorpicker_widget %}
     {% spaceless %}
         {% set color = value|default('#245e4d') %}

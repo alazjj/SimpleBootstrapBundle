@@ -73,8 +73,8 @@ Add AlazjjSimpleBootstrapBundle in your composer.json:
         "alazjj/jquery/form": "3.28.0",
         "alazjj/bootstrap/twitter": "2.3.1",
         "alazjj/bootstrap/datepicker": "dev-master",
-        "alazjj/bootstrap/colorpicker": "dev-master"
-        "alazjj/SimpleBootstrapBundle": "dev-master",
+        "alazjj/bootstrap/colorpicker": "dev-master",
+        "alazjj/SimpleBootstrapBundle": "dev-master"
     }
 }
 ```

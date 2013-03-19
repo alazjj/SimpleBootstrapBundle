@@ -17,19 +17,15 @@
                 <span class="help-block">{{ form_errors(form) }}</span>
             {% endif %}
         {%  else %}
-            {% if value is not empty %}
-                <p class="displayValue">
-                    {{ value }}
-                </p>
-            {% endif %}
+            <p class="displayedValue">
+                {{ value }}
 
-            {%  if is_editable %}
-                <i class="icon-edit"
-                   data-form-edit="row">
-                    X
-                </i>
-            {% endif %}
-        {% endif %}
+                {% if is_editable %}
+                    <i class="icon-edit pull-right"
+                       data-form-edit="row">
+                    </i>
+                {% endif %}
+            </p>
     </div>
 </div>
 {% endblock form_row %}

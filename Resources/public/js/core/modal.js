@@ -103,11 +103,15 @@ $(function () {
                         $modal.modal('show');
 
                         // Form element in the response
-                        var $form = $('form[data-submit="ajax"]');
-                        // Form Input submit
-                        var $submitButton = $('input[type=submit]');
+                        var $form = $('form[data-submit="ajax"]', $modal);
 
                         if ($form.length == 1) {
+                            // Form Input submit
+                            var $submitButton = $('input[type=submit]', $modal);
+
+                            // Enable form fielf edition
+                            $('[data-form="row"]').formEditField();
+
                             $form.on("submit", function(even) {
                                 even.preventDefault();
 

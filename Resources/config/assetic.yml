@@ -1,6 +1,6 @@
 assetic:
     use_controller: false
-    bundles: []
+    bundles: ['AlazjjSimpleBootstrapBundle']
     filters:
         cssrewrite: ~
     assets:
@@ -15,6 +15,7 @@ assetic:
                 - bundles/alazjjsimplebootstrap/css/bootstrap.min.css
                 - bundles/alazjjsimplebootstrap/css/datepicker.css
                 - bundles/alazjjsimplebootstrap/css/colorpicker.css
+                - bundles/alazjjsimplebootstrap/css/base.css
             filters: [cssrewrite]
         jquery_js:
             inputs:

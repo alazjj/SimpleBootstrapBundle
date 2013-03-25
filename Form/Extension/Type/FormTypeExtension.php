@@ -1,16 +1,13 @@
 <?php
 
-namespace Alazjj\SimpleBootstrapBundle\Form\Extension;
+namespace Alazjj\SimpleBootstrapBundle\Form\Extension\Type;
 
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
-use Symfony\Component\Form\ReversedTransformer;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 
-class FormExtension extends AbstractTypeExtension
+class FormTypeExtension extends AbstractTypeExtension
 {
     public function getExtendedType()
     {

@@ -12,6 +12,6 @@ services:
             - { name: form.type, alias: colorpicker }
 
     alazjj_simple_bootstrap.form.extension:
-        class: Alazjj\SimpleBootstrapBundle\Form\Extension\FormExtension
+        class: Alazjj\SimpleBootstrapBundle\Form\Extension\Type\FormTypeExtension
         tags:
             - { name: form.type_extension, alias: form }

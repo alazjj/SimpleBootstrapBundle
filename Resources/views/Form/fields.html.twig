@@ -18,7 +18,12 @@
             {% endif %}
         {%  else %}
             <p class="displayedValue">
-                {{ value }}
+                {% set _block = block(value_block_name) %}
+                {% if _block is not empty %}
+                    {{ _block|raw }}
+                {% else %}
+                    {{ block('value_block_default') }}
+                {% endif %}
 
                 {% if is_editable %}
                     <i class="icon-edit pull-right"
@@ -30,6 +35,26 @@
     </div>
 </div>
 {% endblock form_row %}
+
+
+{# Displayed string value #}
+{% block value_block_default %}
+    {{ value }}
+{% endblock value_block_default %}
+
+
+{# Displayed date value #}
+{% block value_block_date %}
+{% if widget == 'single_text' %}
+    {{ block('value_block_default') }}
+{% else %}
+    {{ date_pattern|replace({
+    '{{ year }}':  value.year,
+    '{{ month }}': value.month,
+    '{{ day }}': value.day,
+    }) }}
+{% endif %}
+{% endblock value_block_date %}
 
 
 {# Form label #}

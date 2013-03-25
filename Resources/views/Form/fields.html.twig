@@ -39,7 +39,8 @@
 
 {# Displayed string value #}
 {% block value_block_default %}
-    {{ value }}
+    {% set default = 'form.default.value' | trans %}
+    {{ value | default(default) }}
 {% endblock value_block_default %}
 
 

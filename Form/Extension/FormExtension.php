@@ -41,7 +41,15 @@ class FormExtension extends AbstractTypeExtension
         if (array_key_exists('is_active', $options)) {
             $view->vars['is_active'] = $options['is_active'];
             if (!$options['is_active']) {
+                // Name of the block to be sued to render the value
                 $view->vars['value_block_name'] = 'value_block_' . $view->vars['name'];
+
+                if ($view->vars['name'] == 'choice') {
+                    $choices = $options['choices'];
+                    if (isset($choices[$view->vars['value']])) {
+                        $view->vars['value'] = $choices[$view->vars['value']];
+                    }
+                }
             }
 //            $formBuilder = $form->getConfig();
 //            $formType = $form->getConfig()->getType();

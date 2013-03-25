@@ -6,3 +6,9 @@ modal:
         title: Confirmation
         validate: Validate
         close: Close
+form:
+    fields:
+        checkbox:
+            values:
+                yes: Yes
+                no: No

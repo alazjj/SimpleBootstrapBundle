@@ -51,16 +51,6 @@ class FormExtension extends AbstractTypeExtension
                     }
                 }
             }
-//            $formBuilder = $form->getConfig();
-//            $formType = $form->getConfig()->getType();
-//            if ($formType->getName() == 'date') {
-//                $dateAsArray = $view->vars['value'];
-//                //var_dump($dateAsArray);exit;
-//                $view->vars['value'] = date(
-//                    $options['format'],
-//                    mktime(0, 0, 0, (int)$dateAsArray['month'], (int)$dateAsArray['day'], (int)$dateAsArray['year'])
-//                );
-//            }
         }
     }
 }

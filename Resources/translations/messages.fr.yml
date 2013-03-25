@@ -6,3 +6,9 @@ modal:
         title: Demande de confirmation
         validate: Valider
         close: Fermer
+form:
+    fields:
+        checkbox:
+            values:
+                yes: Oui
+                no: Non

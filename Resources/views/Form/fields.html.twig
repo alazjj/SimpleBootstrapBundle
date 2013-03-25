@@ -43,6 +43,16 @@
 {% endblock value_block_default %}
 
 
+{# Displayed checkbox value #}
+{% block value_block_checkbox %}
+    {% if checked %}
+        {{ 'form.fields.checkbox.values.yes' | trans }}
+    {% else %}
+        {{ 'form.fields.checkbox.values.no' | trans }}
+    {% endif %}
+{% endblock value_block_checkbox %}
+
+
 {# Displayed date value #}
 {% block value_block_date %}
 {% if widget == 'single_text' %}

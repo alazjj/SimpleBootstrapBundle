@@ -3,6 +3,27 @@
     padding-top: 5px;
 }
 
+/* Choice fields display with radio*/
+.control-choice-input {
+    position: relative;
+    height: 20px;
+    padding: 3px 0;
+}
+.control-choice-input input {
+    float: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    top: 4px;
+}
+.control-choice-input .control-label {
+    float: none;
+    position: absolute;
+    left: 25px;
+    top: 0;
+    width: auto;
+}
+
 .modal form {
     margin-bottom: 0px;
 }

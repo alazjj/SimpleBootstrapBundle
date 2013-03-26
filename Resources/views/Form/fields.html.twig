@@ -5,14 +5,15 @@
 {% block form_row %}
 <div class="control-group {% if errors|length %}error{% endif %}">
     {{ form_label(form) }}
+    {% set form_widget = form_widget(form) %}
     <div class="controls"
          {% if is_editable %}
-         data-form-input='{{ form_widget(form) }}'
+         data-form-input='{{ form_widget }}'
          data-form="row"
          {% endif %}>
 
         {%  if is_active %}
-            {{ form_widget(form) }}
+            {{ form_widget | raw }}
             {% if errors|length %}
                 <span class="help-block">{{ form_errors(form) }}</span>
             {% endif %}
@@ -105,3 +106,18 @@
         {{ block('help') }}
     {% endspaceless %}
 {% endblock colorpicker_widget %}
+
+
+{# Choice widget #}
+{% block choice_widget_expanded %}
+    {% spaceless %}
+        <div {{ block('widget_container_attributes') }}>
+        {% for child in form %}
+            <div class="control-choice-input">
+                {{ form_widget(child) }}
+                {{ form_label(child) }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_expanded %}

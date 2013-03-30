@@ -1,13 +1,19 @@
 /** Form CSS */
 .displayedValue {
     padding-top: 5px;
+    position: relative;
+}
+.displayedValue i.icon-edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    float: none;
 }
 
 /* Choice fields display with radio*/
 .control-choice-input {
     position: relative;
     height: 20px;
-    padding: 3px 0;
 }
 .control-choice-input input {
     float: none;

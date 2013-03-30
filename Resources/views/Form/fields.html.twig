@@ -18,7 +18,7 @@
                 <span class="help-block">{{ form_errors(form) }}</span>
             {% endif %}
         {%  else %}
-            <p class="displayedValue">
+            <div class="displayedValue">
                 {% set _block = block(value_block_name) %}
                 {% if _block is not empty %}
                     {{ _block|raw }}
@@ -31,7 +31,7 @@
                        data-form-edit="row">
                     </i>
                 {% endif %}
-            </p>
+            </div>
         {% endif %}
     </div>
 </div>
@@ -53,6 +53,18 @@
         {{ 'form.fields.checkbox.values.no' | trans }}
     {% endif %}
 {% endblock value_block_checkbox %}
+
+
+{# Displayed choice value(s) #}
+{% block value_block_choice %}
+    <div {{ block('widget_container_attributes') }}>
+        {% for v in value %}
+            <div class="control-choice-input">
+                {{ v }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock value_block_choice %}
 
 
 {# Displayed date value #}

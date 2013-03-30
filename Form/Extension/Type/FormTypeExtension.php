@@ -38,24 +38,32 @@ class FormTypeExtension extends AbstractTypeExtension
         if (array_key_exists('is_active', $options)) {
             $view->vars['is_active'] = $options['is_active'];
             if (!$options['is_active']) {
+                $formType = $form->getConfig()->getType();
+
                 // Name of the block to be sued to render the value
-                $view->vars['value_block_name'] = 'value_block_' . $view->vars['name'];
+                $view->vars['value_block_name'] = 'value_block_' . $formType->getName();
 
                 // Maybe it is better to move it in choiceTypeExtension
-                $formType = $form->getConfig()->getType();
+                //$formType = $form->getConfig()->getType();
                 if ($formType->getName() == 'choice') {
                     $choices = $options['choices'];
+                    $newValue = null;
+
                     if (!is_array($view->vars['value'])) {
                         if (array_key_exists($view->vars['value'], $choices)) {
-                            $view->vars['value'] = $choices[$view->vars['value']];
+                            $newValue[] = $choices[$view->vars['value']];
                         }
                     } else {
+                        reset($choices);
                         foreach($view->vars['value'] as $key => $checked) {
                             if ($checked) {
-                                $view->vars['value'] = $choices[$key];
+                                $newValue[] = current($choices);
                             }
+                            next($choices);
                         }
                     }
+
+                    $view->vars['value'] = $newValue;
                 }
             }
         }

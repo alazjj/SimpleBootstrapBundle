@@ -3,18 +3,16 @@ $(function () {
      * Manage form editable field by field
      */
     $.fn.formEditField = function(options) {
-        // Form element
-        var $form = $(this).closest('form');
-
         // Settings
         var settings = $.extend( {
             'allFields' : false
         }, options);
 
-
         this.each(function () {
             var $this = $(this);
-            // Imput Markup
+            // Form element
+            var $form = $this.closest('form');
+            // Input Markup
             var input = $this.data('form-input');
             // Input object
             var $input = $(input);
@@ -31,7 +29,7 @@ $(function () {
             }
 
 
-            // Submit the value to the serveur if it change.
+            // Submit the value to the server if it change.
             $input.on("change", function() {
                 $input.attr('disabled', true);
 
@@ -39,7 +37,7 @@ $(function () {
                 $.ajax({
                     url: $form.attr('action'),
                     type: $form.attr('method'),
-                    data: $input.serialize()
+                    data: $form.serialize()
                 })
                 .done(function(data) {
                     if(data != undefined) {

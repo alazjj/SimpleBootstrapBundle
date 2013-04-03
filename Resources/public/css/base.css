@@ -1,3 +1,8 @@
+/** Flashes messages */
+#flashesMessage ul {
+    margin-bottom: 0px;
+}
+
 /** Form CSS */
 .displayedValue {
     padding-top: 5px;

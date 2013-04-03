@@ -9,12 +9,17 @@ use Symfony\Component\Form\FormInterface;
 
 class FormTypeExtension extends AbstractTypeExtension
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getExtendedType()
     {
         return 'form';
     }
 
-
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setOptional(array(
@@ -28,7 +33,9 @@ class FormTypeExtension extends AbstractTypeExtension
         ));
     }
 
-
+    /**
+     * {@inheritdoc}
+     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if (array_key_exists('is_editable', $options)) {
@@ -42,29 +49,6 @@ class FormTypeExtension extends AbstractTypeExtension
 
                 // Name of the block to be sued to render the value
                 $view->vars['value_block_name'] = 'value_block_' . $formType->getName();
-
-                // Maybe it is better to move it in choiceTypeExtension
-                //$formType = $form->getConfig()->getType();
-                if ($formType->getName() == 'choice') {
-                    $choices = $options['choices'];
-                    $newValue = null;
-
-                    if (!is_array($view->vars['value'])) {
-                        if (array_key_exists($view->vars['value'], $choices)) {
-                            $newValue[] = $choices[$view->vars['value']];
-                        }
-                    } else {
-                        reset($choices);
-                        foreach($view->vars['value'] as $key => $checked) {
-                            if ($checked) {
-                                $newValue[] = current($choices);
-                            }
-                            next($choices);
-                        }
-                    }
-
-                    $view->vars['value'] = $newValue;
-                }
             }
         }
     }

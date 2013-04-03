@@ -15,3 +15,8 @@ services:
         class: Alazjj\SimpleBootstrapBundle\Form\Extension\Type\FormTypeExtension
         tags:
             - { name: form.type_extension, alias: form }
+
+    alazjj_simple_bootstrap.choice.extension:
+        class: Alazjj\SimpleBootstrapBundle\Form\Extension\Type\ChoiceTypeExtension
+        tags:
+            - { name: form.type_extension, alias: choice }

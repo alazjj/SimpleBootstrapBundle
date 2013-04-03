@@ -2,6 +2,7 @@
 
 namespace Alazjj\SimpleBootstrapBundle\Form\Extension;
 
+use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\ChoiceTypeExtension;
 use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\FormTypeExtension;
 use Symfony\Component\Form\AbstractExtension;
 
@@ -14,6 +15,7 @@ class AljjazExtension extends AbstractExtension
     {
         return array(
             new FormTypeExtension(),
+            new ChoiceTypeExtension(),
         );
     }
 }

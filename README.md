@@ -9,10 +9,6 @@ Add AlazjjSimpleBootstrapBundle in your composer.json:
 {
     "repositories": [
         {
-            "type": "vcs",
-            "url":  "https://github.com/alazjj/SimpleBootstrapBundle.git"
-        },
-        {
             "type": "package",
             "package": {
                 "name": "alazjj/jquery",
@@ -74,7 +70,7 @@ Add AlazjjSimpleBootstrapBundle in your composer.json:
         "alazjj/bootstrap/twitter": "2.3.1",
         "alazjj/bootstrap/datepicker": "dev-master",
         "alazjj/bootstrap/colorpicker": "dev-master",
-        "alazjj/SimpleBootstrapBundle": "dev-master"
+        "alazjj/simple-bootstrap-bundle": "0.1.1"
     }
 }
 ```

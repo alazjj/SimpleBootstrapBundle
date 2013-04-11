@@ -5,7 +5,8 @@ $(function () {
     $.fn.formEditField = function(options) {
         // Settings
         var settings = $.extend( {
-            'editionType' : 'field'
+            'editionType': 'field',
+            'submitFieldOn': 'change'
         }, options);
 
         this.each(function () {
@@ -29,36 +30,48 @@ $(function () {
                 case 'form':
                     $this.html($input);
                     break;
+                default:
+                    alert('Oops! An Error Occurred, the submitFieldOn param is invalidated');
+                    break;
             }
 
             // Submit the value to the server if it change.
-            $input.on("change", function() {
-                $input.attr('disabled', true);
+            switch (settings.submitFieldOn) {
+                case 'change':
+                    $input.on("change", function() {
+                        $input.attr('disabled', true);
 
-                // Send field data
-                $.ajax({
-                    url: $form.attr('action'),
-                    type: $form.attr('method'),
-                    data: $form.serialize()
-                })
-                .done(function(data) {
-                    if(data != undefined) {
-                        if(data.status == 'error') {
-                            if (data.message == undefined) {
-                                data.message = 'Oops! An Error Occurred, You can update this fields';
+                        // Send field data
+                        $.ajax({
+                            url: $form.attr('action'),
+                            type: $form.attr('method'),
+                            data: $form.serialize()
+                        })
+                        .done(function(data) {
+                            if(data != undefined) {
+                                if(data.status == 'error') {
+                                    if (data.message == undefined) {
+                                        data.message = 'Oops! An Error Occurred, you can update this fields';
+                                    }
+                                    alert(data.message);
+                                }
+
+                                $input.attr('disabled', false)
+                            } else {
+                                alert('Oops! An Error Occurred, you can update this fields');
                             }
-                            alert(data.message);
-                        }
-
-                        $input.attr('disabled', false)
-                    } else {
-                        alert('Oops! An Error Occurred, You can update this fields');
-                    }
-                })
-                .fail(function(data) {
-                    alert('Oops! An Error Occurred, You can update this fields');
-                });
-            });
+                        })
+                        .fail(function(data) {
+                            alert('Oops! An Error Occurred, you can update this fields');
+                        });
+                    });
+                    break;
+                case 'disable':
+                    break;
+                default:
+                    alert('Oops! An Error Occurred, the submitFieldOn param is invalidated');
+                    break;
+            }
         });
 
         return $(this);

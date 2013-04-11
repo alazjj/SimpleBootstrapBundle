@@ -5,7 +5,7 @@ $(function () {
     $.fn.formEditField = function(options) {
         // Settings
         var settings = $.extend( {
-            'allFields' : false
+            'editionType' : 'field'
         }, options);
 
         this.each(function () {
@@ -20,14 +20,16 @@ $(function () {
             var $inputAction = $this.find('[data-form-edit="row"]');
 
             // Update the input form markup
-            if(settings.allFields == false) {
-                $inputAction.on("click", function() {
+            switch (settings.editionType) {
+                case 'field':
+                    $inputAction.on("click", function() {
+                        $this.html($input);
+                    });
+                    break;
+                case 'form':
                     $this.html($input);
-                });
-            } else {
-                $this.html($input);
+                    break;
             }
-
 
             // Submit the value to the server if it change.
             $input.on("change", function() {

@@ -2,44 +2,19 @@ $(function () {
     /**
      * Manage form editable field by field
      */
-    $.fn.formEditField = function(options) {
+    $.fn.simpleForm = function(options) {
         // Settings
         var settings = $.extend( {
-            'editionType': 'field',
             'submitFieldOn': 'change'
         }, options);
 
-        this.each(function () {
-            var $this = $(this);
-            // Form element
-            var $form = $this.closest('form');
-            // Input Markup
-            var input = $this.data('form-input');
-            // Input object
-            var $input = $(input);
-            // Edit Input
-            var $inputAction = $this.find('[data-form-edit="row"]');
-
-            // Update the input form markup
-            switch (settings.editionType) {
-                case 'field':
-                    $inputAction.on("click", function() {
-                        $this.html($input);
-                    });
-                    break;
-                case 'form':
-                    $this.html($input);
-                    break;
-                default:
-                    alert('Oops! An Error Occurred, the submitFieldOn param is invalidated');
-                    break;
-            }
-
-            // Submit the value to the server if it change.
+        // Submit the value to the server, for the moment there only is
+        // one way to edit it the. We submit it on the onChange event
+        var submitDataFrom = function($form, $field) {
             switch (settings.submitFieldOn) {
                 case 'change':
-                    $input.on("change", function() {
-                        $input.attr('disabled', true);
+                    $field.on("change", function() {
+                        $field.attr('disabled', true);
 
                         // Send field data
                         $.ajax({
@@ -47,23 +22,23 @@ $(function () {
                             type: $form.attr('method'),
                             data: $form.serialize()
                         })
-                        .done(function(data) {
-                            if(data != undefined) {
-                                if(data.status == 'error') {
-                                    if (data.message == undefined) {
-                                        data.message = 'Oops! An Error Occurred, you can update this fields';
+                            .done(function(data) {
+                                if(data != undefined) {
+                                    if(data.status == 'error') {
+                                        if (data.message == undefined) {
+                                            data.message = 'Oops! An Error Occurred, you can update this fields';
+                                        }
+                                        alert(data.message);
                                     }
-                                    alert(data.message);
-                                }
 
-                                $input.attr('disabled', false)
-                            } else {
+                                    $field.attr('disabled', false)
+                                } else {
+                                    alert('Oops! An Error Occurred, you can update this fields');
+                                }
+                            })
+                            .fail(function(data) {
                                 alert('Oops! An Error Occurred, you can update this fields');
-                            }
-                        })
-                        .fail(function(data) {
-                            alert('Oops! An Error Occurred, you can update this fields');
-                        });
+                            });
                     });
                     break;
                 case 'disable':
@@ -72,6 +47,42 @@ $(function () {
                     alert('Oops! An Error Occurred, the submitFieldOn param is invalidated');
                     break;
             }
+        }
+
+        // Form edition row management
+        var rowEditionManagement = function($form, $row, printInput) {
+            var $field = $($row.data('form-input'));
+            var $fieldDataEdition = $row.find('[data-form-edit="row"]');
+
+            if (!printInput) {
+                $fieldDataEdition.on("click", function() {
+                    $row.html($field);
+                });
+            } else {
+                $row.html($field);
+            }
+
+            submitDataFrom($form, $field);
+        }
+
+        this.each(function () {
+            var $form = $(this);
+            var $formRows = $form.find('[data-form="row"]');
+            var $formDataEdition = $form.find('[data-form-edit="form"]');
+
+            // Enable field edition : one by one
+            $formRows.each(function(index) {
+                rowEditionManagement($form, $(this), false);
+            });
+
+            // Enable field edition : all fields
+            $formDataEdition.on('click', function(e){
+                e.preventDefault();
+
+                $formRows.each(function(index) {
+                    rowEditionManagement($form, $(this), true);
+                });
+            });
         });
 
         return $(this);

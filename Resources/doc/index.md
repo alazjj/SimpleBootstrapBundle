@@ -15,11 +15,11 @@ The compiled version of Bootstrap Twitter avoids the installation of Less or Sas
 
 Here is the menu :
 
-1. [Requirements](https://github.com/alazjj/SimpleBootstrapBundle/wiki/Requirements)
-2. [Installation](https://github.com/alazjj/SimpleBootstrapBundle/wiki/Installation)
-3. [Configuration](https://github.com/alazjj/SimpleBootstrapBundle/wiki/Configuration)
-4. [Modal extensions](https://github.com/alazjj/SimpleBootstrapBundle/wiki/Modal-extensions)
-5. [Form extensions](https://github.com/alazjj/SimpleBootstrapBundle/wiki/Form-extensions)
+1. [Requirements](https://github.com/alazjj/SimpleBootstrapBundle/blob/master/Resources/doc/requirements.md)
+2. [Installation](https://github.com/alazjj/SimpleBootstrapBundle/blob/master/Resources/doc/installation.md)
+3. [Configuration](https://github.com/alazjj/SimpleBootstrapBundle/blob/master/Resources/doc/configuration.md)
+4. [Modal extensions](https://github.com/alazjj/SimpleBootstrapBundle/blob/master/Resources/doc/modal_extensions.md)
+5. [Form extensions](https://github.com/alazjj/SimpleBootstrapBundle/blob/master/Resources/doc/form_extensions.md)
 
-* [Change log](https://github.com/alazjj/SimpleBootstrapBundle/wiki/Change-log)
-* [Todo list](https://github.com/alazjj/SimpleBootstrapBundle/wiki/Todo-List)
+* [Change log](https://github.com/alazjj/SimpleBootstrapBundle/blob/master/Resources/doc/change_log.md)
+* [Todo list](https://github.com/alazjj/SimpleBootstrapBundle/blob/master/Resources/doc/todo_list.md)

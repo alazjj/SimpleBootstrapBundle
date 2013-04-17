@@ -144,6 +144,7 @@ If you have included a form in your modal, you can add a **data-submit="ajax"** 
 * Use **204** to close the popin.
 * Use **205** to entirely reload the page.
 
+
     <?php
     // TestController.php
     public function testAction()

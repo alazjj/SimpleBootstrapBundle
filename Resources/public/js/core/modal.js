@@ -109,8 +109,8 @@ $(function () {
                             // Form Input submit
                             var $submitButton = $('input[type=submit]', $modal);
 
-                            // Enable form fielf edition
-                            $('[data-form="row"]').formEditField();
+                            // Enable form field edition
+                            $form.simpleForm();
 
                             $form.on("submit", function(even) {
                                 even.preventDefault();

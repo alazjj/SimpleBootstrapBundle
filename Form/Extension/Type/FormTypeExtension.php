@@ -24,12 +24,14 @@ class FormTypeExtension extends AbstractTypeExtension
     {
         $resolver->setOptional(array(
             'is_active',
-            'is_editable'
+            'is_editable',
+            'controls_attr'
         ));
 
         $resolver->setDefaults(array(
             'is_active' => true,
-            'is_editable' => false
+            'is_editable' => false,
+            'controls_attr' => array()
         ));
     }
 
@@ -38,6 +40,11 @@ class FormTypeExtension extends AbstractTypeExtension
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
+        $view->vars['controls_attr'] = array_merge(
+            $options['controls_attr'],
+            array('class' => 'controls')
+        );
+
         if (array_key_exists('is_editable', $options)) {
             $view->vars['is_editable'] = $options['is_editable'];
         }

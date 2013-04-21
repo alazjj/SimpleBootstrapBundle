@@ -2,7 +2,7 @@
     "name": "alazjj/simple-bootstrap-bundle",
     "type": "symfony-bundle",
     "description": "",
-    "keywords": ["bootstrap", "twitter"],
+    "keywords": ["bootstrap", "twitter", "form", "modal"],
     "homepage": "https://github.com/alazjj/SimpleBootstrapBundle",
     "license": "MIT",
 

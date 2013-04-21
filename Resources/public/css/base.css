@@ -14,6 +14,14 @@
     right: 0;
     float: none;
 }
+.modal form {
+    margin-bottom: 0px;
+}
+
+.datepicker.input-append {
+    display: block; /*TODO : test it*/
+    padding: 0px;
+}
 
 /* Choice fields display with radio*/
 .control-choice-input {
@@ -33,8 +41,4 @@
     left: 25px;
     top: 0;
     width: auto;
-}
-
-.modal form {
-    margin-bottom: 0px;
 }

@@ -20,3 +20,10 @@ services:
         class: Alazjj\SimpleBootstrapBundle\Form\Extension\Type\ChoiceTypeExtension
         tags:
             - { name: form.type_extension, alias: choice }
+
+    alazjj_simple_bootstrap.date.extension:
+        class: Alazjj\SimpleBootstrapBundle\Form\Extension\Type\DateTypeExtension
+        arguments:
+            - "%locale%"
+        tags:
+            - { name: form.type_extension, alias: date }

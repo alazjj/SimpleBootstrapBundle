@@ -37,6 +37,9 @@ class DateTypeExtension extends AbstractTypeExtension
     }
 
     /**
+     * See the following link to get datepicker configuration options
+     * @link http://www.eyecon.ro/bootstrap-datepicker/
+     *
      * {@inheritdoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)

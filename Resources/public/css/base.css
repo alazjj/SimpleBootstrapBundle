@@ -36,6 +36,7 @@
 .colorpicker.input-append {
     display: block; /*TODO : test it*/
     padding: 0px;
+    font-size: inherit;
 }
 
 /* Choice fields display with radio*/

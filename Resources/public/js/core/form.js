@@ -61,15 +61,15 @@ $(function () {
 
         // Form edition row management
         var rowEditionManagement = function($form, $row, printInput) {
-            var $field = $($row.data('form-input'));
+            var $field = $row.find('input');;
             var $fieldDataEdition = $row.find('[data-form-edit="row"]');
 
             if (!printInput) {
                 $fieldDataEdition.on("click", function() {
-                    $row.html($field);
+                    $row.html($row.data('form-input'));
                 });
             } else {
-                $row.html($field);
+                $row.html($row.data('form-input'));
             }
 
             submitDataFrom($form, $field);

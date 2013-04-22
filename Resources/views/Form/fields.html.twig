@@ -108,8 +108,8 @@
     {% spaceless %}
         {{ block('form_widget_simple') }}
         <span class="add-on">
-            <i {% if value != '' %}style="background-color: {{ value }}"{% endif %}></i>
-        </span>'{{ value }}'
+            <i {% if value %}style="background-color: {{ value }}"{% endif %}></i>
+        </span>
     {% endspaceless %}
 {% endblock colorpicker_widget %}
 

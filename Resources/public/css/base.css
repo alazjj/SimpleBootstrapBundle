@@ -33,6 +33,11 @@
     padding: 0px;
 }
 
+.colorpicker.input-append {
+    display: block; /*TODO : test it*/
+    padding: 0px;
+}
+
 /* Choice fields display with radio*/
 .control-choice-input {
     position: relative;

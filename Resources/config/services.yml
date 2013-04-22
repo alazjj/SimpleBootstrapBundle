@@ -7,7 +7,7 @@ services:
             - { name: form.type, alias: datepicker }
 
     alazjj_simple_bootstrap.form.type.colorpicker:
-        class: Alazjj\SimpleBootstrapBundle\Form\Type\ColorpickerType
+        class: Alazjj\SimpleBootstrapBundle\Form\Extension\Type\ColorpickerType
         tags:
             - { name: form.type, alias: colorpicker }
 

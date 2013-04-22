@@ -12,6 +12,7 @@
 namespace Alazjj\SimpleBootstrapBundle\Form\Extension;
 
 use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\ChoiceTypeExtension;
+use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\ColorpickerType;
 use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\DateTypeExtension;
 use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\FormTypeExtension;
 use Symfony\Component\Form\AbstractExtension;
@@ -27,6 +28,16 @@ class AljjazExtension extends AbstractExtension
             new DateTypeExtension(),
             new FormTypeExtension(),
             new ChoiceTypeExtension()
+        );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function loadTypes()
+    {
+        return array(
+            new ColorpickerType()
         );
     }
 }

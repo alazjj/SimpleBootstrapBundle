@@ -106,15 +106,10 @@
 {# Colorpicker widget #}
 {% block colorpicker_widget %}
     {% spaceless %}
-        {% set color = value|default('#245e4d') %}
-        <div class="input-append color colorpicker" data-color="{{ color }}" data-color-format="hex">
-            <input class="{{ attr.class }}" type="text" value="" {{ block('widget_attributes') }}>
-            <span class="add-on">
-                <i style="background-color: {{ color }}"></i>
-            </span>
-        </div>
-        {{ form_errors(form) }}
-        {{ block('help') }}
+        {{ block('form_widget_simple') }}
+        <span class="add-on">
+            <i {% if value != '' %}style="background-color: {{ value }}"{% endif %}></i>
+        </span>'{{ value }}'
     {% endspaceless %}
 {% endblock colorpicker_widget %}
 

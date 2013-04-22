@@ -18,80 +18,206 @@ class DateTypeTest extends TypeTestCase
 {
     public function testPassDatepickerOption()
     {
-        $this->checkViewVars('datepicker', false, false, 'Invalid datepicker view value');
+        $this->checkViewVars('datepicker', false, false, 'Invalid datepicker view value', false);
         $this->checkViewVars('datepicker', true, true, 'Invalid datepicker view value');
-        $this->checkViewVars('datepicker', null, false, 'Invalid datepicker view value (form value is null)');
+        $this->checkViewVars('datepicker', null, false, 'Invalid datepicker view value (form value is null)', false);
+    }
+
+    /**
+     * @expectedException \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     */
+    public function testPassInvalidWeekStartOption()
+    {
+        $this->factory->create('date', null, array(
+            'week_start' => 15,
+            'datepicker' => true,
+            'widget' => 'single_text'
+        ));
     }
 
     public function testPassWeekStartOption()
     {
-        $this->checkViewVars('week_start', 2, 2, 'Invalid week_start view value');
-        $this->checkViewVars('week_start', 3, 3, 'Invalid week_start view value');
-        $this->checkViewVars('week_start', null, 1, 'Invalid week_start view value (form value is null)');
+        // Set an option
+        $form = $this->factory->create('date', null, array(
+            'week_start' => 2,
+            'datepicker' => true,
+            'widget' => 'single_text'
+        ));
+        $view = $form->createView();
+
+        $this->assertEquals(
+            2,
+            $view->vars['controls_attr']['data-date-weekstart'],
+            'Invalid week_start view value'
+        );
+
+        // Test default option
+        $form = $this->factory->create('date', null, array(
+            'datepicker' => true,
+            'widget' => 'single_text'
+        ));
+        $view = $form->createView();
+
+        $this->assertEquals(
+            1,
+            $view->vars['controls_attr']['data-date-weekstart'],
+            'Invalid week_start view value'
+        );
+    }
+
+    /**
+     * @expectedException \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     */
+    public function testPassInvalidViewModeOption()
+    {
+        $this->factory->create('date', null, array(
+            'view_mode' => 15,
+            'datepicker' => true,
+            'widget' => 'single_text'
+        ));
     }
 
     public function testPassViewModeOption()
     {
-        $this->checkViewVars('view_mode', 0, 0, 'Invalid view_mode view value');
-        $this->checkViewVars('view_mode', 'day', 'day', 'Invalid view_mode view value');
-        //$this->checkViewVars('view_mode', null, false, 'Invalid view_mode view value (form value is null)');
+        // Set an int option
+        $form = $this->factory->create('date', null, array(
+            'view_mode' => 1,
+            'datepicker' => true,
+            'widget' => 'single_text'
+        ));
+        $view = $form->createView();
+
+        $this->assertEquals(
+            1,
+            $view->vars['controls_attr']['data-date-viewmode'],
+            'Invalid week_start view value'
+        );
+
+        // Set an string option
+        $form = $this->factory->create('date', null, array(
+            'view_mode' => 'months',
+            'datepicker' => true,
+            'widget' => 'single_text'
+        ));
+        $view = $form->createView();
+
+        $this->assertEquals(
+            'months',
+            $view->vars['controls_attr']['data-date-viewmode'],
+            'Invalid week_start view value'
+        );
+
+        // Test default option
+        $form = $this->factory->create('date', null, array(
+            'datepicker' => true,
+            'widget' => 'single_text'
+        ));
+        $view = $form->createView();
+
+        $this->assertEquals(
+            0,
+            $view->vars['controls_attr']['data-date-viewmode'],
+            'Invalid week_start view value'
+        );
+    }
+
+    /**
+     * @expectedException \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     */
+    public function testPassInvalidMinViewModeOption()
+    {
+        $this->factory->create('date', null, array(
+            'min_view_mode' => 15,
+            'datepicker' => true,
+            'widget' => 'single_text'
+        ));
     }
 
     public function testPassMinViewModeOption()
     {
-        $this->checkViewVars('min_view_mode', 0, 0, 'Invalid min_view_mode view value');
-        $this->checkViewVars('min_view_mode', 'day', 'day', 'Invalid min_view_mode view value');
-        //$this->checkViewVars('min_view_mode', null, false, 'Invalid min_view_mode view value (form value is null)');
+        // Set an int option
+        $form = $this->factory->create('date', null, array(
+            'min_view_mode' => 1,
+            'datepicker' => true,
+            'widget' => 'single_text'
+        ));
+        $view = $form->createView();
+
+        $this->assertEquals(
+            1,
+            $view->vars['controls_attr']['data-date-minviewmode'],
+            'Invalid week_start view value'
+        );
+
+        // Set an string option
+        $form = $this->factory->create('date', null, array(
+            'min_view_mode' => 'months',
+            'datepicker' => true,
+            'widget' => 'single_text'
+        ));
+        $view = $form->createView();
+
+        $this->assertEquals(
+            'months',
+            $view->vars['controls_attr']['data-date-minviewmode'],
+            'Invalid week_start view value'
+        );
+
+        // Test default option
+        $form = $this->factory->create('date', null, array(
+            'datepicker' => true,
+            'widget' => 'single_text'
+        ));
+        $view = $form->createView();
+
+        $this->assertEquals(
+            0,
+            $view->vars['controls_attr']['data-date-minviewmode'],
+            'Invalid week_start view value'
+        );
     }
+
 
     public function testPassHiddenOption()
     {
-        $form = $this->factory->create('form', null, array(
-            'datepicker' => true
-        ));
-        $view = $form->createView();
-
-        $this->assertEquals('controls datepicker date input-append', $view->vars['class']);
-        $this->assertEquals($view->vars['value'], $view->vars['data-date']);
-    }
-
-    public function testPassClassOption()
-    {
-        $form = $this->factory->create('form', null, array(
+        $form = $this->factory->create('date', null, array(
             'datepicker' => true,
-            'class' => 'cssClass'
+            'widget' => 'single_text',
         ));
+        $form->bind('2010-06-02');
         $view = $form->createView();
 
-        $this->assertEquals('controls cssClass datepicker date input-append', $view->vars['class']);
+        $this->assertEquals('controls datepicker date input-append', $view->vars['controls_attr']['class']);
+        $this->assertEquals('2010-06-02', $view->vars['controls_attr']['data-date']);
     }
 
     public function testPassFormatOption()
     {
-        $form = $this->factory->create('form', null, array(
+        $form = $this->factory->create('date', null, array(
             'datepicker' => true,
-            'format' => 'dd/MM/yy'
+            'format' => 'dd/MM/yy',
+            'widget' => 'single_text'
         ));
         $view = $form->createView();
 
         $this->assertEquals('dd/mm/yy', $view->vars['controls_attr']['data-date-format']);
 
-        $form = $this->factory->create('form', null, array(
+        $form = $this->factory->create('date', null, array(
             'datepicker' => true,
-            'format' => 'dd/MM/y'
+            'format' => 'd/M/y',
+            'widget' => 'single_text'
         ));
         $view = $form->createView();
 
-        $this->assertEquals('dd/mm/yyyy', $view->vars['controls_attr']['data-date-format']);
+        $this->assertEquals('d/m/yyyy', $view->vars['controls_attr']['data-date-format']);
     }
 
     public function testPassAutoFormatDate()
     {
-        \Locale::setDefault('en');
-
-        $form = $this->factory->create('form', null, array(
+        $form = $this->factory->create('date', null, array(
             'datepicker' => true,
-            'auto_format' => true
+            'auto_format' => true,
+            'widget' => 'single_text'
         ));
         $view = $form->createView();
 
@@ -114,9 +240,10 @@ class DateTypeTest extends TypeTestCase
 
         if ($isActive) {
             $option['datepicker'] = true;
+            $option['widget'] = 'single_text';
         }
 
-        $form = $this->factory->create('form', null, $option);
+        $form = $this->factory->create('date', null, $option);
         $view = $form->createView();
 
         $this->assertEquals($viewValue, $view->vars[$key], $mess);

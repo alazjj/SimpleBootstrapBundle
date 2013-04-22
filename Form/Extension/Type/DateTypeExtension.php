@@ -15,7 +15,6 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToLocalizedStringTransformer;
 
@@ -51,12 +50,12 @@ class DateTypeExtension extends AbstractTypeExtension
         ));
 
         $resolver->addAllowedValues(array(
-            'week_start' => range(0, 6)
+            'week_start' => range(0, 6),
+            'view_mode' => array('years', 'days', 'months', 0, 1, 2),
+            'min_view_mode' => array('years', 'days', 'months', 0, 1, 2)
         ));
 
         $resolver->setAllowedTypes(array(
-            'view_mode' => array('int', 'string'),
-            'min_view_mode' => array('int', 'string'),
             'datepicker' => array('bool'),
             'auto_format' => array('bool'),
         ));
@@ -64,7 +63,7 @@ class DateTypeExtension extends AbstractTypeExtension
         $resolver->setDefaults(
             array(
                 'datepicker' => false,
-                'datepicker' => false,
+                'auto_format' => false,
                 'week_start' => 1,
                 'view_mode' => 0,
                 'min_view_mode' => 0,

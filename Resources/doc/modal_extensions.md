@@ -37,7 +37,7 @@ You can use the following options  on the clickable element which opens the popi
 
 * `data-url` : if the user confirms the action, he will be redirected on this URL
 * `data-message` : the message displayed on the modal
-* `data-target` : the id of the modal container (use an anchor like #modalContainer).
+* `data-target` : the id of the modal container (use an anchor like `#modalContainer`).
 
 If you want to use a link to open your modal, you can omit the `data-target` option. In this case, the `href` attribute will be used instead.
 ```html

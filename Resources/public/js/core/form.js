@@ -59,6 +59,18 @@ $(function () {
             }
         }
 
+        // Manage specific instance of plugin js.
+        var fieldPluginInstanceManagement = function($row, $field) {
+            switch ($field.data('form-type')) {
+                case 'colorpicker':
+                    $row.colorpicker();
+                    break;
+                case 'datepicker':
+                    $row.datepicker();
+                    break;
+            }
+        }
+
         // Form edition row management
         var rowEditionManagement = function($form, $row, printInput) {
             /*
@@ -74,11 +86,14 @@ $(function () {
             if (!printInput) {
                 $fieldDataEdition.on("click", function() {
                     $row.html($tmpDiv.children());
+                    fieldPluginInstanceManagement($row, $field);
                 });
             } else {
-                $row.html($tmpDiv.children())
+                $row.html($tmpDiv.children());
+                fieldPluginInstanceManagement($row, $field);
             }
 
+            // Manage data submition
             submitDataFrom($form, $field);
         }
 

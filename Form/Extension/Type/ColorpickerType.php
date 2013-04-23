@@ -71,5 +71,9 @@ class ColorpickerType extends AbstractType
         if (array_key_exists('format', $options)) {
             $view->vars['controls_attr']['data-color-format'] = $options['format'];
         }
+
+        if (array_key_exists('is_editable', $options)) {
+            $view->vars['attr']['data-form-type'] = 'colorpicker';
+        }
     }
 }

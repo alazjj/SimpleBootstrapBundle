@@ -88,6 +88,10 @@ class DateTypeExtension extends AbstractTypeExtension
             $view->vars['controls_attr']['class'] .= ' datepicker date input-append';
             $view->vars['controls_attr']['data-date'] = $view->vars['value'];
 
+            if (array_key_exists('is_editable', $options)) {
+                $view->vars['attr']['data-form-type'] = 'datepicker';
+            }
+
             if (array_key_exists('auto_format', $options) && $options['auto_format']) {
                 $dateFormat = new \IntlDateFormatter(
                     $this->locale,

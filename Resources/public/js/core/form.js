@@ -61,15 +61,22 @@ $(function () {
 
         // Form edition row management
         var rowEditionManagement = function($form, $row, printInput) {
-            var $field = $row.find('input');;
+            /*
+             * Tansform the inpu markup in jquery object beacause we need to
+             * find the form element (input/select) to active the datas submition
+             */
+            var $tmpDiv = $('<div></div>').hide();
+            $tmpDiv.html($row.data('form-input'));
+
+            var $field = $tmpDiv.find('[data-form-type]');
             var $fieldDataEdition = $row.find('[data-form-edit="row"]');
 
             if (!printInput) {
                 $fieldDataEdition.on("click", function() {
-                    $row.html($row.data('form-input'));
+                    $row.html($tmpDiv.children());
                 });
             } else {
-                $row.html($row.data('form-input'));
+                $row.html($tmpDiv.children())
             }
 
             submitDataFrom($form, $field);

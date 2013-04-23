@@ -80,6 +80,14 @@
 {% endif %}
 {% endblock value_block_date %}
 
+{% block value_block_colorpicker %}
+    {# Hack, the color picker find the first <i> element to
+       update its background color. We do not want to
+       update field edition button which is <i> elemnt too #}
+    <i style="diplay:none"></i>
+    {{ block('value_block_default') }}
+{% endblock value_block_colorpicker %}
+
 
 {# Form label #}
 {% block form_label %}

@@ -77,16 +77,14 @@ If you want to let SimpleBootstrap manage the required assets for you, here is w
         "alazjj/bootstrap/colorpicker": "dev-master",
         "alazjj/simple-bootstrap-bundle": "0.1.1"
     },
-    {
-        "scripts": {
-            "post-install-cmd": [
-                "Alazjj\\SimpleBootstrapBundle\\Composer\\ScriptHandler::installAssets"
-            ],
-            "post-update-cmd": [
-                "Alazjj\\SimpleBootstrapBundle\\Composer\\ScriptHandler::installAssets"
-            ]
-        }
-    }
+    "scripts": {
+        "post-install-cmd": [
+            "Alazjj\\SimpleBootstrapBundle\\Composer\\ScriptHandler::installAssets"
+        ],
+        "post-update-cmd": [
+            "Alazjj\\SimpleBootstrapBundle\\Composer\\ScriptHandler::installAssets"
+        ]
+    }  
 }
 ```
 The post install and post updates scripts symlink Bootstrap CSS and images into the SimpleBootstrapBundle folder. This procedure is required to enable the CSS rewrite filter.

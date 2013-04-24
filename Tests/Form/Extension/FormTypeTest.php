@@ -33,7 +33,8 @@ class FormTypeTest extends TypeTestCase
     public function testPassControlsAttr()
     {
         $form = $this->factory->create('form', null, array(
-            'controls_attr' => array('id' => 'datepicker')
+            'controls_attr' => array('id' => 'datepicker'),
+            'is_editable' => true
         ));
 
         $view = $form->createView();
@@ -41,7 +42,8 @@ class FormTypeTest extends TypeTestCase
         $this->assertEquals(
             array(
                 'id' => 'datepicker',
-                'class' => 'controls'
+                'class' => 'controls',
+                'data-form' => 'row'
             ),
             $view->vars['controls_attr']
         );

@@ -8,7 +8,6 @@
     {% set form_widget = form_widget(form) %}
     <div {% if is_editable %}
          data-form-input="{{ form_widget }}"
-         data-form="row"
          {% endif %}
          {{ block('form_row_controls_attributes') }}>
 

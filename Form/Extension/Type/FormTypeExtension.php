@@ -64,7 +64,7 @@ class FormTypeExtension extends AbstractTypeExtension
             if (!$options['is_active']) {
                 $formType = $form->getConfig()->getType();
 
-                // Name of the block to be sued to render the value
+                // Name of the block to be used to render the value
                 $view->vars['value_block_name'] = 'value_block_' . $formType->getName();
             }
         }

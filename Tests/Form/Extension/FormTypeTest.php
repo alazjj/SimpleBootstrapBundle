@@ -47,6 +47,22 @@ class FormTypeTest extends TypeTestCase
         );
     }
 
+    public function testPassAttr()
+    {
+        $form = $this->factory->create('form', null, array(
+            'is_editable' => true
+        ));
+
+        $view = $form->createView();
+
+        $this->assertEquals(
+            array(
+                'data-form-type' => 'input'
+            ),
+            $view->vars['attr']
+        );
+    }
+
     /**
      * Check if the option set to the form is correctly set to the view datas
      *

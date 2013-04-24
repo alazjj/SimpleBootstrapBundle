@@ -224,6 +224,25 @@ class DateTypeTest extends TypeTestCase
         $this->assertEquals('m/d/yy', $view->vars['controls_attr']['data-date-format']);
     }
 
+    public function testPassAttr()
+    {
+        $form = $this->factory->create('date', null, array(
+            'is_editable' => true,
+            'datepicker' => true,
+            'widget' => 'single_text',
+        ));
+
+        $view = $form->createView();
+
+        $this->assertEquals(
+            array(
+                'class' => 'input-small',
+                'data-form-type' => 'datepicker'
+            ),
+            $view->vars['attr']
+        );
+    }
+
     /**
      * Check if the option set to the form is correctly set to the view datas
      *

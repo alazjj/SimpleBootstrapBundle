@@ -53,6 +53,23 @@ class ColorpickerTypeTest extends TypeTestCase
         $this->assertEquals('#FFF', $view->vars['controls_attr']['data-color']);
     }
 
+    public function testPassAttr()
+    {
+        $form = $this->factory->create('colorpicker', null, array(
+            'is_editable' => true
+        ));
+
+        $view = $form->createView();
+
+        $this->assertEquals(
+            array(
+                'class' => 'input-small',
+                'data-form-type' => 'colorpicker'
+            ),
+            $view->vars['attr']
+        );
+    }
+
     protected function getExtensions()
     {
         return array(

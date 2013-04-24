@@ -23,6 +23,7 @@
     top: 0;
     right: 0;
     float: none;
+    cursor:pointer;
 }
 .modal form {
     margin-bottom: 0px;

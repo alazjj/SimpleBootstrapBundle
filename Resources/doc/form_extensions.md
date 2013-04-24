@@ -32,7 +32,8 @@ class ContactType extends AbstractType
     }
 }
 ```
-# View
+### View
+
 It is possible to active edition for all fields, you have to put data-form-edit="form" on a button (or other element) but you must use the main.js provided by the bundle.
 
 ```html
@@ -50,7 +51,8 @@ You can manualy active edition for all fields too, you have to put HTML element 
 * **disable** : the form is submited by the user (he click on the submit input)
 * **change** : the data is submited when you change the value of the field
 
-# Controller
+### Controller
+
 If the value submited is not valid you must return json response like the folling example :
 ```php
 <?php
@@ -67,13 +69,18 @@ public function contactAction()
 If any errors occured, the status must be "error" and the massage is displayed to the user to warm him. You only have to return JsonResponse (instead of using flashes) if the request is an ajax request.
 
 
+
+
 Form Type extensions
 ====================
 
 Form Type
 ---------
+
 **Parent type :** form
+
 **Inherited options :** form type options
+
 **Option :**
 * **is_active** (type: boolean, default : true) : The html markup of the input is rendered if true or the value is printed instead.
 * **is_editable** (type: boolean, default : false) : Print the edition button if the input field is not rendered (is_active = false).
@@ -81,8 +88,11 @@ Form Type
 
 Date Type
 ---------
+
 **Parent type :** date
-**Inherited options :** date type options
+
+**Inherited options :** date type options 
+
 **Option :**
 * **datepicker** (type: boolean, default : false) : Active datepicker if the widget option is set to single_text.
 * **auto_format** (type: boolean, default : false) : Calculate automatically the format option with the locale.
@@ -101,7 +111,9 @@ ColorPicker Type
 ----------------
 
 **Parent type :** text
+
 **Inherited options :** text type options
+
 **Option :**
 * **format** (type: string, default : 'hex') : Set the color format. Accepts: 'hex', 'rgb' and 'rgba'
 

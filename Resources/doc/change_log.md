@@ -1,6 +1,6 @@
 Change log
 ==========
-## 0.1.2 (coming soon)
+0.1.2 (coming soon)
 ----------------------
 * Add bundle on packagist.org
 * Update the documentation (put it in Ressouces/doc and use the rst format)
@@ -9,7 +9,7 @@ Change log
 * ColorPicker Refactoring, usable with SimpleForm
 * Add new option in formType, "controls_attr" puts HTML attributes on the widget container.
 
-## 0.1.1 (4 april 2013)
+0.1.1 (4 april 2013)
 ----------------------
 * Form edition support date and choice field.
 * Creation of a new form extension for the choice type.

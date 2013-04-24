@@ -3,7 +3,7 @@ Change log
 0.1.2 (coming soon)
 ----------------------
 * Add bundle on packagist.org
-* Update the documentation (put it in Ressouces/doc and use the rst format)
+* Update the documentation (put it in Ressouces/doc)
 * formEditField js plugin become SimpleForm (now you enable this plugin on the form instead of the form rows)
 * DatePicker refactoring, usable with SimpleForm
 * ColorPicker Refactoring, usable with SimpleForm

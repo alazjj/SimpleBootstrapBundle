@@ -84,7 +84,7 @@ $(function () {
                 openModalWithBody($modal, jqXHR.responseText);
             } else {
                 // TODO : get the content of the symfony response.
-                alert('Impossible to display the popup, Error code ' + jqXHR.status + ' Error message : ' + jqXHR.statusText)
+                alert('Impossible to display the popup, Error code ' + jqXHR.status + ' Error message : ' + jqXHR.statusText);
             }
         }
 
@@ -113,46 +113,37 @@ $(function () {
                         $modal.modal('show');
 
                         // Form element in the response
-                        var $form = $('form[data-submit="ajax"]', $modal);
+                        var $form = $('form[data-form-submission]', $modal);
 
                         if ($form.length == 1) {
                             // Form Input submit
                             var $submitButton = $('input[type=submit]', $modal);
 
                             // Enable form field edition
-                            $form.simpleForm();
-
-                            $form.on("submit", function(even) {
-                                even.preventDefault();
-
-                                // Disable the submit button
-                                $submitButton.attr('disabled', true);
-
-                                // Ajax Submition
-                                $form.ajaxSubmit({
-                                    statusCode: {
-                                        // You have to use 204 (http status code) if you want send
-                                        // a request and close the modal.
-                                        204: function(){
-                                            $modal.modal('hide');
-                                        },
-                                        // If you want to reload the page use 205
-                                        205: function(){
-                                            location.reload();
-                                        }
+                            $form.simpleForm({
+                                statusCode: {
+                                    // The form is valid, we close the modal
+                                    200: function(){
+                                        $modal.modal('hide');
                                     },
-                                    // The request is successful (code), you display the modal.
-                                    success: function(responseText, textStatus, jqXHR) {
-                                        if(jqXHR.status == 200) {
-                                            $modal.html(responseText);
+                                    // The form was not valid, we print it with errors
+                                    202: function(responseText){
+                                        var $tmpDiv = $('<div></div>').hide();
+                                        $tmpDiv.html(responseText);
+
+                                        var $repForm = $tmpDiv.find('form[data-form-submission]');
+
+                                        if ($repForm.length == 1) {
+                                            responseText = $repForm.children();
                                         }
+                                        $form.html(responseText);
                                     },
-                                    // The request failed
-                                    error: function(jqXHR) {
-                                        openModalWithError ($modal, jqXHR);
+                                    // If you want to reload the page use 205
+                                    205: function(){
+                                        location.reload();
                                     }
-                                });
-                            });
+                                }
+                            }).bind($form);
                         }
                     }
                 }).fail(function(jqXHR) {

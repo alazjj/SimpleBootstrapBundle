@@ -13,53 +13,163 @@ $(function () {
      * Manage form editable field by field
      */
     $.fn.simpleForm = function(options) {
-        // Settings
-        var settings = $.extend( {
-            'submitFieldOn': 'change'
-        }, options);
 
-        // Submit the value to the server, for the moment there only is
-        // one way to edit it the. We submit it on the onChange event
-        var submitDataFrom = function($form, $field) {
-            switch (settings.submitFieldOn) {
-                case 'change':
-                    $field.on("change", function() {
-                        $field.attr('disabled', true);
+        /**
+         * Default settings
+         */
+        var settings = $.extend({}, options);
 
-                        // Send field data
-                        $.ajax({
-                            url: $form.attr('action'),
-                            type: $form.attr('method'),
-                            data: $form.serialize()
-                        })
-                            .done(function(data) {
-                                if(data != undefined) {
-                                    if(data.status == 'error') {
-                                        if (data.message == undefined) {
-                                            data.message = 'Oops! An Error Occurred, you can update this fields';
-                                        }
-                                        alert(data.message);
-                                    }
+        /**
+         * Alert display management
+         *
+         * @param $alert
+         * @param message
+         * @param type
+         * @param diplay
+         */
+        var alertMessageManagement = function ($form, message, type, diplay) {
+            var $alert = $form.find('[data-form="message"]');
+            if ($alert.length == 1) {
+                $alert.addClass('alert-' + type);
 
-                                    $field.attr('disabled', false)
-                                } else {
-                                    alert('Oops! An Error Occurred, you can update this fields');
-                                }
-                            })
-                            .fail(function(data) {
-                                alert('Oops! An Error Occurred, you can update this fields');
-                            });
-                    });
-                    break;
-                case 'disable':
-                    break;
-                default:
-                    alert('Oops! An Error Occurred, the submitFieldOn param is invalidated');
-                    break;
+                if (message != '') {
+                    $alert.html(message);
+                }
+
+                if (diplay) {
+                    $alert.removeClass('hide');
+                    $alert.addClass('in');
+                } else {
+                    $alert.removeClass('in');
+                    $alert.addClass('hide');
+                }
             }
         }
 
-        // Manage specific instance of plugin js.
+
+        /**
+         * Display error messages
+         *
+         * @param $form
+         * @param message
+         */
+        var displayErrorMessMessage = function($form, message) {
+            alertMessageManagement($form, message, 'error', true);
+        }
+
+
+        /**
+         * Display success messages
+         *
+         * @param $form
+         * @param message
+         */
+        var displaySuccessMessage = function($form, message) {
+            alertMessageManagement($form, message, 'success', true);
+        }
+
+
+        /**
+         * Get submition way
+         *
+         * @param $form
+         * @returns {string} : ajax or change
+         */
+        var getSubmissionWay = function($form) {
+            return $form.data('form-submission');
+        }
+
+
+        /**
+         * Submit the field value to the server, only the ajax
+         * submition on the change event is available
+         *
+         * @param $form
+         * @param $field
+         */
+        var submitFieldData = function($form, $field) {
+            var submissionWay = getSubmissionWay($form);
+            if (submissionWay == 'change') {
+                $field.on("change", function() {
+                    $field.attr('disabled', true);
+
+                    // Submit form
+                    $form.ajaxSubmit({
+                        statusCode: {
+                            202: function(responseText){
+                                if(responseText == '') {
+                                    responseText = 'Oops! An Error Occurred, you can update this fields';
+                                }
+
+                                displayErrorMessMessage(
+                                    $form,
+                                    responseText
+                                );
+
+                                $field.attr('disabled', false);
+                            }
+                        },
+                        // The request has failed
+                        error: function(jqXHR) {
+                            $field.attr('disabled', false);
+                            displayErrorMessMessage(
+                                $form,
+                                'Oops! An Error Occurred, you can update this fields'
+                            );
+                            $field.attr('disabled', false);
+                        }
+                    });
+                });
+            }
+        }
+
+
+        var submitFormData = function($form) {
+            var submissionWay = getSubmissionWay($form);
+            if (submissionWay == 'ajax') {
+                $form.on("submit", function(even) {
+                    even.preventDefault();
+                    var errorCallback = function(jqXHR) {
+                        displayErrorMessMessage(
+                            $form,
+                            'Impossible to display the popup, Error code ' + jqXHR.status + ' Error message : ' + jqXHR.statusText
+                        );
+                    }
+
+                    var submissionOptions = {
+                        statusCode: {
+                            // The form was not valid, we print it with errors
+                            202: function(responseText){
+                                $form.html(responseText);
+                            }
+                        },
+                        // The form is valid, we print the response given by the server.
+                        // The server have to return the success message (not the form).
+                        success: function(responseText) {
+                            displaySuccessMessage($form, responseText);
+                        },
+                        // The request has failed
+                        error: errorCallback
+                    }
+
+                    if (settings) {
+                        settings.error = errorCallback;
+                        submissionOptions = settings;
+                    }
+
+                    // Submit form
+                    $form.ajaxSubmit(submissionOptions);
+                });
+            }
+        }
+
+
+        /**
+         * Manage specific instance of plugin js.
+         *
+         * @param $row
+         * @param $field
+         */
         var fieldPluginInstanceManagement = function($row, $field) {
             switch ($field.data('form-type')) {
                 case 'colorpicker':
@@ -71,7 +181,14 @@ $(function () {
             }
         }
 
-        // Form edition row management
+
+        /**
+         * Form edition row management
+         *
+         * @param $form
+         * @param $row
+         * @param printInput
+         */
         var rowEditionManagement = function($form, $row, printInput) {
             /*
              * Tansform the inpu markup in jquery object beacause we need to
@@ -94,13 +211,15 @@ $(function () {
             }
 
             // Manage data submition
-            submitDataFrom($form, $field);
+            submitFieldData($form, $field);
         }
+
 
         this.each(function () {
             var $form = $(this);
             var $formRows = $form.find('[data-form="row"]');
             var $formDataEdition = $form.find('[data-form-edit="form"]');
+            var submissionWay = getSubmissionWay($form);
 
             // Enable field edition : one by one
             $formRows.each(function(index) {
@@ -115,6 +234,8 @@ $(function () {
                     rowEditionManagement($form, $(this), true);
                 });
             });
+
+            submitFormData($form);
         });
 
         return $(this);

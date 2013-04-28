@@ -33,41 +33,70 @@ class ContactType extends AbstractType
 }
 ```
 ### View
+You can submit the value of the field by ajax on the change event, you have to put data-form-submission="change" on the form element.
 
-It is possible to active edition for all fields, you have to put data-form-edit="form" on a button (or other element) but you must use the main.js provided by the bundle.
+**Form field configuration :**
+* is_editable : true,
+* is_active : false
 
 ```html
-<form class="form-horizontal" action="ptah/to/edit" method="POST" id="#form">
+<form class="form-horizontal" action="ptah/to/edit" method="POST" data-form-submission="change" id="#form">
+    <!-- The button active all fields (print the html render of the input) -->
     <button data-form-edit="form">Edit all fields<button/>
+
+    <!-- This div is used to display error or success message -->
+    <div class="alert fade hide" data-form="message"></div>
+
     {{ form_rest(form) }}
-    <input type="submit" value="Send" />
 </form>
+
+<script>
+    $('#form').simpleForm();
+</script>
 ```
 
-```js
-    $('#form').simpleForm({'submitFieldOn': 'disable'});
+You can enable ajax submission on a form, you have to put data-form-submission="ajax" on the form element.
+
+**Form field configuration :**
+* is_editable : false,
+* is_active : true or false if you use "Edit all fields" button
+
+```html
+<form class="form-horizontal" action="ptah/to/edit" method="POST" data-form-submission="ajax" id="#form">
+    <!-- The button active all fields (print the html render of the input) -->
+    <button data-form-edit="form">Edit all fields<button/>
+
+    <!-- This div is used to display error or success message -->
+    <div class="alert fade hide" data-form="message"></div>
+
+    {{ form_rest(form) }}
+
+    <input type="submit" value="submit"/>
+</form>
+
+<script>
+    $('#form').simpleForm();
+</script>
 ```
-You can manualy active edition for all fields too, you have to put HTML element with data-form-edit="form" like attribute. You can choose the datas submition with the submitFieldOn plugin option, two ways :
-* **disable** : the form is submited by the user (he click on the submit input)
-* **change** : the data is submited when you change the value of the field
 
 ### Controller
 
-If the value submited is not valid you must return json response like the folling example :
+You have to deal with the http code to tell what happen to simpleForm. It support the following codes :
+* 200 : The form was submited and correctly processed. The server can return a success message, it will be print to the user.
+* 202 : The data of the form was not valid, the server return the form html markup (rendered with errors). It will be print to the user again (the user can edit it again).
+
 ```php
 <?php
 public function contactAction()
 {
     if (!$form->isValid() && $this->getRequest()->isXmlHttpRequest()) {
-        return new \Symfony\Component\HttpFoundation\JsonResponse(array(
-            'status' => 'error',
-            'message' => 'Oops! An Error Occurred'
-        ));
+        // SimpleForm will print the form
+        return new \Symfony\Component\HttpFoundation\JsonResponse('<form>...</form>', 202);
     }
+    // SimpleForm will print a beautifull bootstrap alert with the message : 'The datas of the form was saved'
+    return new \Symfony\Component\HttpFoundation\JsonResponse('The datas of the form was saved');
 }
 ```
-If any errors occured, the status must be "error" and the massage is displayed to the user to warm him. You only have to return JsonResponse (instead of using flashes) if the request is an ajax request.
-
 
 
 
@@ -122,3 +151,16 @@ You have to apply the javascript plugin, you can use .colorpicker as default css
 $('.colorpicker').colorpicker();
 ```
 Caution : If you use simpleForm plugin it will automatically apply the datepicker and colorpicker plugin. If you apply them, those both plugins will does not work...
+
+
+Typeahead Type
+----------------
+
+**Parent type :** text
+
+**Inherited options :** text type options
+
+**Option :**
+* **source** (type: array) : Data source
+* **items** (type: integer, default : 8) : The max number of items to display in the dropdown.
+* **minLength** (type: integer, default : 1) : The minimum character length needed before triggering autocomplete suggestions

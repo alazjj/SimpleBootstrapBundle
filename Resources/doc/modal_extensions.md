@@ -139,10 +139,10 @@ If you want to use a link to open your modal, you can omit the `data-target` opt
     });
 </script>
 ```
-If you have included a form in your modal, you can add a `data-submit="ajax"` attribute on the form. Thus, the plugin  will send your form with ajax. The following HTTP codes allows you to render the popin in different ways :
+If you have included a form in your modal, you can add a `form[data-form-submission]` attribute on the form. Thus, the plugin  will send your form with ajax. The following HTTP codes allows you to render the popin in different ways :
 
-* Use **200** to update popin container.
-* Use **204** to close the popin.
+* Use **200** to close the popin .
+* Use **202** to update popin container with the render of the form (the form was not valid).
 * Use **205** to entirely reload the page.
 
 ```php
@@ -151,10 +151,10 @@ If you have included a form in your modal, you can add a `data-submit="ajax"` at
 public function testAction()
 {
     if (/* you want to update the popin container */) {
-        return new \Symfony\Component\HttpFoundation\Response('', 200);
+        return new \Symfony\Component\HttpFoundation\Response('<form>...</form>', 202);
     }
     elseif (/* you want to close the popin */) {
-        return new \Symfony\Component\HttpFoundation\Response('', 204);
+        return new \Symfony\Component\HttpFoundation\Response('');
     }
     elseif (/* you want to reload the page */) {
         return new \Symfony\Component\HttpFoundation\Response('', 205);

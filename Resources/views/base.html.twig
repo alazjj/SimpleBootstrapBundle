@@ -8,6 +8,7 @@
     {% block css %}
         {% stylesheets
             "@bootstrap_css"
+            "@AlazjjSimpleBootstrapBundle/Resources/public/css/*"
         %}
             <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen"/>
         {% endstylesheets %}
@@ -17,6 +18,7 @@
             "@jquery_js"
             "@bootstrap_js"
             "@AlazjjSimpleBootstrapBundle/Resources/public/js/core/*"
+            "@AlazjjSimpleBootstrapBundle/Resources/public/js/main.js"
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

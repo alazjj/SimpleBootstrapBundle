@@ -11,6 +11,11 @@ services:
         tags:
             - { name: form.type, alias: colorpicker }
 
+    alazjj_simple_bootstrap.form.type.typeahead:
+        class: Alazjj\SimpleBootstrapBundle\Form\Extension\Type\TypeaheadType
+        tags:
+            - { name: form.type, alias: typeahead }
+
     alazjj_simple_bootstrap.form.extension:
         class: Alazjj\SimpleBootstrapBundle\Form\Extension\Type\FormTypeExtension
         tags:

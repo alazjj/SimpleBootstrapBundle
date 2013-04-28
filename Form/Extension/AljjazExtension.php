@@ -15,6 +15,7 @@ use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\ChoiceTypeExtension;
 use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\ColorpickerType;
 use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\DateTypeExtension;
 use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\FormTypeExtension;
+use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\TypeaheadType;
 use Symfony\Component\Form\AbstractExtension;
 
 class AljjazExtension extends AbstractExtension
@@ -37,7 +38,8 @@ class AljjazExtension extends AbstractExtension
     protected function loadTypes()
     {
         return array(
-            new ColorpickerType()
+            new ColorpickerType(),
+            new TypeaheadType()
         );
     }
 }

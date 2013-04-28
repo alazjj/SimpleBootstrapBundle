@@ -3,9 +3,9 @@ Modals
 
 SimpleBootstrap provides jQuery plugins which extend Twitter Bootstrap modals. This plugins offers the following modal extensions :
 
-* **Simple modal** allows you to open a modal and get its content from a remote server.
-* **Confirmation modal** is used to validate actions. For example, you can ask the user if he really wants to delete something.
-* **Alert modal** allows you to open a modal to inform the user that something happened.
+* **simpleModal()** allows you to open a modal and get its content from a remote server.
+* **confirmModal()** is used to validate actions. For example, you can ask the user if he really wants to delete something.
+* **alertModal()** allows you to open a modal to inform the user that something happened.
 
 Options of the modals are defined on the clickable element as HTML5 data attributes.
 
@@ -89,8 +89,8 @@ If you want to use a link to open your modal, you can omit the `data-target` opt
 ```html
 <button class="alertPopin"
         data-target="#MyAlertModalContainer"
-        data-message="Hello aRn0D !!">
-   Delete
+        data-message="Hello world ! This is a silly example!">
+   Hello
 </button>
 
 <div class="modal fade hide" id="MyAlertModalContainer">
@@ -128,7 +128,7 @@ If you want to use a link to open your modal, you can omit the `data-target` opt
 <button class="simplePopin"
         data-target="#MySimpleModalContainer"
         data-url="app.php/hello">
-   Delete
+   Hello world!
 </button>
 
 <div class="modal fade hide" id="MySimpleModalContainer"></div>
@@ -178,3 +178,27 @@ Each macro renders a specific modal container. Macros accept one argument which 
 * `basicModalContainer` for the simple modal
 
 By default, the jQuery plugins will look for these modal IDs. Thus you can omit to put the `data-target` attribute on the clickable elements which open the popins.
+
+But this is not all, the lazy mode goes further. Instead of calling yourself the jQuery plugins the lazy mode allows you to only define a `data-modal` on the clickable element which opens the popin. This means that instead of using this
+```html
+<button class="simplePopin"
+        data-target="#MySimpleModalContainer"
+        data-url="app.php/hello">
+   Hello world!
+</button>
+
+<div class="modal fade hide" id="MySimpleModalContainer"></div>
+
+<script>
+    $(function () {
+        $('.simplePopin').simpleModal();
+    });
+</script>
+```
+you can simply use this :
+```html
+<button data-modal="simple"
+        data-url="app.php/hello">
+   Hello world!
+</button>
+```

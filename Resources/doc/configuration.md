@@ -53,3 +53,10 @@ twig:
 Base template
 -------------
 
+If you decided to let SimpleBootstrapBundle manage all the required assets, you can use the 'AlazjjSimpleBootstrapBundle::base.html.twig' template.
+This is a very minimal template which defines a body block, modals containers and includes all the required assets plus SimpleBootstrapBundle extensions.
+
+Otherwise, you will have to include the following assets manually in your project :
+* @AlazjjSimpleBootstrapBundle/Resources/public/css/*
+* @AlazjjSimpleBootstrapBundle/Resources/public/js/core/*
+* @AlazjjSimpleBootstrapBundle/Resources/public/js/main.js

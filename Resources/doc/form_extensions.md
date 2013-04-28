@@ -117,7 +117,7 @@ ColorPicker Type
 **Option :**
 * **format** (type: string, default : 'hex') : Set the color format. Accepts: 'hex', 'rgb' and 'rgba'
 
-You have to apply the javascript plugin, you can use .datepicker as default css selector beacause the date form type is render with its css classes
+You have to apply the javascript plugin, you can use .colorpicker as default css selector beacause the date form type is render with its css classes
 ```js
 $('.colorpicker').colorpicker();
 ```

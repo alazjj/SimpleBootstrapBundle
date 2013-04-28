@@ -8,6 +8,8 @@ Change log
 * DatePicker refactoring, usable with SimpleForm
 * ColorPicker Refactoring, usable with SimpleForm
 * Add new option in formType, "controls_attr" puts HTML attributes on the widget container.
+* The response of SimpleForm has changed (we use the same http code everywhere).
+* Add a TypeaheadType
 
 0.1.1 (4 april 2013)
 ----------------------

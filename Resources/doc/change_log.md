@@ -2,21 +2,21 @@ Change log
 ==========
 0.1.2 (coming soon)
 ----------------------
-* Add bundle on packagist.org
+* Adding bundle on packagist.org
 * Update the documentation (put it in Ressouces/doc)
 * formEditField js plugin become SimpleForm (now you enable this plugin on the form instead of the form rows)
 * DatePicker refactoring, usable with SimpleForm
 * ColorPicker Refactoring, usable with SimpleForm
-* Add new option in formType, "controls_attr" puts HTML attributes on the widget container.
-* The response of SimpleForm has changed (we use the same http code everywhere).
-* Add a TypeaheadType
+* Adding new option in formType, "controls_attr" puts HTML attributes on the widget container.
+* SimpleForm manage the same HTTP code everywhere (200 : ok, 202 : invalid datas form).
+* Adding a TypeaheadType based on the bootstrap typeahead
 
 0.1.1 (4 april 2013)
 ----------------------
 * Form edition support date and choice field.
 * Creation of a new form extension for the choice type.
-* Add tests for the form types.
-* Add flashes messages template.
+* Adding tests for the form types.
+* Adding flashes messages template.
 * Fix ajax field value submition (on change event).
 
 0.1.0 (15 march 2013)

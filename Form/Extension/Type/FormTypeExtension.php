@@ -56,8 +56,10 @@ class FormTypeExtension extends AbstractTypeExtension
 
         if (array_key_exists('is_editable', $options)) {
             $view->vars['is_editable'] = $options['is_editable'];
-            $view->vars['attr']['data-form-type'] = 'input';
-            $view->vars['controls_attr']['data-form'] = 'row';
+            if ($options['is_editable']) {
+                $view->vars['attr']['data-form-type'] = 'input';
+                $view->vars['controls_attr']['data-form'] = 'row';
+            }
         }
 
         if (array_key_exists('is_active', $options)) {

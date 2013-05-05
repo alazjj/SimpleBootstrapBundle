@@ -32,3 +32,8 @@ services:
             - "%locale%"
         tags:
             - { name: form.type_extension, alias: date }
+
+    alazjj_simple_bootstrap.collection.extension:
+        class: Alazjj\SimpleBootstrapBundle\Form\Extension\Type\CollectionTypeExtension
+        tags:
+            - { name: form.type_extension, alias: collection }

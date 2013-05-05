@@ -138,6 +138,19 @@
 {% endblock choice_widget_expanded %}
 
 
+{# Collection widget #}
+{% block collection_widget %}
+    {% spaceless %}
+        <i data-collection="add" class="icon-edit pull-right">add</i>
+        <div {% if prototype is defined %}data-prototype="{{ form_rest(prototype) | e }}"{% endif %}
+           data-collection="container">
+            {% for child in form %}
+                {{ form_widget(child) }}
+            {% endfor %}
+        </div>
+    {% endspaceless %}
+{% endblock collection_widget %}
+
 {# Display attribute to the widget container #}
 {% block form_row_controls_attributes %}
     {% spaceless %}

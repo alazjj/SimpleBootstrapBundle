@@ -12,6 +12,7 @@
 namespace Alazjj\SimpleBootstrapBundle\Form\Extension;
 
 use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\ChoiceTypeExtension;
+use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\CollectionTypeExtension;
 use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\ColorpickerType;
 use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\DateTypeExtension;
 use Alazjj\SimpleBootstrapBundle\Form\Extension\Type\FormTypeExtension;
@@ -28,7 +29,8 @@ class AljjazExtension extends AbstractExtension
         return array(
             new DateTypeExtension(),
             new FormTypeExtension(),
-            new ChoiceTypeExtension()
+            new ChoiceTypeExtension(),
+            new CollectionTypeExtension(),
         );
     }
 
